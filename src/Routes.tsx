@@ -3,6 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 import Dashboard from './Displays/Dashboard';
 import UserIndex from './Components/Contents/Users/UserIndex';
 import AccountDisplay from './Displays/AccountDisplay';
+import ActivityIndex from './Components/Contents/Activities/ActivityIndex';
 
 type Props = {
   sessionToken: string | null;

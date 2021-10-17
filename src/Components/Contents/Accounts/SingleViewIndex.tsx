@@ -108,7 +108,7 @@ const SingleViewIndex = (props: Props) => {
   return (
     <>
       {showLoading()}
-      <Container>
+      <>
         <SingleAccountDisplay
           token={props.token}
           users={users}
@@ -120,16 +120,9 @@ const SingleViewIndex = (props: Props) => {
           updateActive={updateActive}
           accountToUpdate={accountToUpdate}
         />
-      </Container>
+      </>
     </>
   );
 };
 
 export default SingleViewIndex;
-
-export const Container = styled.div`
-  display: flex;
-  margin: 35px;
-  width: 30vw;
-  height: auto;
-`;

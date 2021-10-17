@@ -17,13 +17,13 @@ type Activity = {
   id: string;
   activityNotes: string;
   dueDate: string;
+  accountId: string;
   userId: string;
 };
 
 type Props = {
   token: string | null;
   toggleEditOn: Function;
-  editActivity: Function;
   activityToUpdate: Activity;
   users: User[];
   fetchActivities: Function;
@@ -36,15 +36,22 @@ const ActivityEdit = (props: Props) => {
   const [editDueDate, setEditDueDate] = useState(
     props.activityToUpdate.dueDate
   );
+
   const [editUserId, setEditUserId] = useState(props.activityToUpdate.userId);
 
   const ActivityUpdate = (e: React.SyntheticEvent): void => {
+    console.log(props.activityToUpdate.id);
+    e.preventDefault();
     fetch(`${APIURL}/activity/update/${props.activityToUpdate.id}`, {
       method: 'Put',
       body: JSON.stringify({
         activityNotes: editActivityNotes,
         dueDate: editDueDate,
         userId: editUserId,
+      }),
+      headers: new Headers({
+        'Content-type': 'application/json',
+        Authorization: `${localStorage.getItem('token')}`,
       }),
     })
       .then((res) => res.json())
@@ -91,10 +98,10 @@ const ActivityEdit = (props: Props) => {
             ))}
           </select>
         </div>
+        <button type='submit' form='ActivityUpdate'>
+          Update
+        </button>
       </form>
-      <button type='submit' form='ActivityUpdate'>
-        Update
-      </button>
     </StyledModal>
   );
 };

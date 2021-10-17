@@ -108,8 +108,10 @@ const SingleAccountDisplay = (props: Props) => {
   };
 
   return (
-    <Container>
-      <div>{AccountMapper()}</div>
+    <>
+      <Container>
+        <div>{AccountMapper()}</div>
+      </Container>
       {props.updateActive && editingAccount ? (
         <AccountEdit
           token={props.token}
@@ -121,7 +123,7 @@ const SingleAccountDisplay = (props: Props) => {
           agencies={props.agencies}
         />
       ) : null}
-    </Container>
+    </>
   );
 };
 
@@ -132,7 +134,8 @@ export const Container = styled.div`
   flex-direction: column;
   border: 3px solid #59328c;
   border-radius: 10px;
-  padding: 25px;
+  padding: 10px;
+  width: 100%;
 
   div {
     display: flex;
@@ -148,9 +151,7 @@ export const Container = styled.div`
     margin: 5px;
   }
 
-  div:nth-child(8) {
-    display: flex;
-    flex-direction: row;
+  div:nth-child(10) {
     justify-content: flex-end;
   }
 
@@ -183,7 +184,7 @@ export const Container = styled.div`
     border-radius: 5px;
     text-align: center;
     margin: 10px 0;
-    padding: 10px;
+    padding: 5px;
 
     &:hover {
       background: transparent;

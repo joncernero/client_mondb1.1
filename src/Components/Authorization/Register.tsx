@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import APIURL from '../../Utilities/Environments';
-import { Container } from '../Styles/RegisterContainer';
+import styled from 'styled-components';
+import * as FiIcons from 'react-icons/fi';
 
 type Props = {
   token: string | null;
@@ -111,10 +112,79 @@ const Register = (props: Props) => {
         </div>
       </form>
       <button type='submit' form='createUser'>
-        Add User
+        <FiIcons.FiPlusSquare />
       </button>
     </Container>
   );
 };
 
 export default Register;
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  border: 2px solid #59328c;
+  border-radius: 10px;
+
+  h1 {
+    color: #59328c;
+    align-self: flex-start;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 10px;
+  }
+
+  form {
+    color: #283747;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  label {
+    align-self: flex-start;
+    margin-bottom: 0.5em;
+    color: #59328c;
+    text-align: left;
+    font-weight: bold;
+  }
+
+  input {
+    align-self: flex-start;
+    padding: 0.5em;
+    color: #283747;
+    background: #eaecee;
+    border: 1px solid #283747;
+    border-radius: 3px;
+    margin-bottom: 1em;
+  }
+
+  select {
+    align-self: flex-start;
+    padding: 0.5em;
+    color: #283747;
+    background: #eaecee;
+    border: 1px solid #283747;
+    border-radius: 3px;
+    margin-bottom: 1em;
+  }
+
+  button {
+    align-self: flex-end;
+    font-size: 30px;
+    border: none;
+    background: none;
+
+    &:hover {
+      background: transparent;
+      color: #c2abe1;
+    }
+  }
+`;

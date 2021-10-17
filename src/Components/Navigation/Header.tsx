@@ -62,7 +62,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   height: 10vh;
-  /* width: 100vw; */
+  width: 100%;
   background-color: #ffffff;
 `;
 

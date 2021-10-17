@@ -1,19 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import APIURL from '../../../Utilities/Environments';
 import AccountTable from './AccountTable';
-import styled from 'styled-components';
-
-type Account = {
-  id: string;
-  accountName: string;
-  accountID: string;
-  customerNumber: number;
-  accountType: string;
-  assignmentDate: string;
-  primaryXCode: string;
-  userId: string;
-  agencyId: string;
-};
+import { Spinner } from '../../Styles/Spinner';
 
 type Props = {
   token: string | null;
@@ -22,7 +10,6 @@ type Props = {
 const AccountIndex = (props: Props) => {
   const [accounts, setAccounts] = useState([]);
   const [users, setUsers] = useState([]);
-  const [updateActive, setUpdateActive] = useState(false);
   const [createActive, setCreateActive] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -67,7 +54,7 @@ const AccountIndex = (props: Props) => {
 
   const showLoading = () => {
     if (isLoading) {
-      return <h1>fetching</h1>;
+      return <Spinner />;
     }
   };
 
@@ -89,8 +76,3 @@ const AccountIndex = (props: Props) => {
 };
 
 export default AccountIndex;
-
-export const Container = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-`;
