@@ -1,6 +1,7 @@
 import React from 'react';
 import SingleViewIndex from '../Components/Contents/Accounts/SingleViewIndex';
 import ActivityIndex from '../Components/Contents/Activities/ActivityIndex';
+import EngagementIndex from '../Components/Contents/Engagements/EngageIndex';
 import styled from 'styled-components';
 
 type Props = {
@@ -15,6 +16,7 @@ const AccountDisplay = (props: Props) => {
       </ChildOne>
       <ChildTwo>
         <ActivityIndex token={props.token} />
+        <EngagementIndex token={props.token} />
       </ChildTwo>
     </Container>
   );
@@ -41,7 +43,5 @@ export const ChildOne = styled.div`
 export const ChildTwo = styled.div`
   grid-area: two;
   width: 100%;
-  border: 3px solid #59328c;
-  border-radius: 10px;
   margin-bottom: 10px;
 `;

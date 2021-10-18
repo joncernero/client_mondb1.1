@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import APIURL from '../../../Utilities/Environments';
-import ActivityTable from './ActivityTable';
+import EngagementTable from './EngageTable';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
+import { Spinner } from '../../Styles/Spinner';
 
-type Activity = {
+type Engagement = {
   id: string;
-  activityNotes: string;
-  dueDate: string;
+  engagementNote: string;
+  date: string;
   accountId: string;
-  userId: string;
 };
 
 type Props = {
@@ -17,25 +17,23 @@ type Props = {
   id?: string;
 };
 
-const ActivityIndex = (props: Props) => {
-  const [activities, setActivities] = useState([]);
-  const [users, setUsers] = useState([]);
+const EngagementIndex = (props: Props) => {
+  const [engagements, setEngagements] = useState([]);
   const [updateActive, setUpdateActive] = useState(false);
   const [createActive, setCreateActive] = useState(false);
   const { id } = useParams<{ id?: string }>();
-  const [activityToUpdate, setActivityToUpdate] = useState({
+  const [engagementToUpdate, setEngagementToUpdate] = useState({
     id: '',
-    activityNotes: '',
-    dueDate: '',
+    engagementNote: '',
+    date: '',
     accountId: '',
-    userId: '',
   });
   const [isLoading, setIsLoading] = useState(true);
 
   let accountId = id;
 
-  const fetchActivities = () => {
-    fetch(`${APIURL}/activity/${accountId}`, {
+  const fetchEngagements = () => {
+    fetch(`${APIURL}/engagement/${accountId}`, {
       method: 'Get',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -43,16 +41,16 @@ const ActivityIndex = (props: Props) => {
       }),
     })
       .then((res) => res.json())
-      .then((activity) => {
-        setActivities(activity);
+      .then((engagement) => {
+        setEngagements(engagement);
       })
       .finally(() => {
         setIsLoading(false);
       });
   };
 
-  const editActivity = (activity: Activity) => {
-    setActivityToUpdate(activity);
+  const editEngagement = (engagement: Engagement) => {
+    setEngagementToUpdate(engagement);
   };
 
   const toggleEditOn = () => {
@@ -65,54 +63,38 @@ const ActivityIndex = (props: Props) => {
 
   const showLoading = () => {
     if (isLoading) {
-      return <h1>fetching</h1>;
+      return <Spinner />;
     }
-  };
-  const fetchUsers = () => {
-    fetch(`${APIURL}/user`, {
-      method: 'Get',
-      headers: new Headers({
-        'Content-Type': 'application/Json',
-        Authorization: `${localStorage.getItem('token')}`,
-      }),
-    })
-      .then((res) => res.json())
-      .then((user) => {
-        setUsers(user);
-      });
   };
 
   useEffect(() => {
-    fetchActivities();
-    fetchUsers();
+    fetchEngagements();
   }, []);
 
   return (
     <>
       <Container>
         {showLoading()}
-        <ActivityTable
+        <EngagementTable
           token={props.token || ''}
-          users={users}
-          activities={activities}
-          fetchActivities={fetchActivities}
+          engagements={engagements}
+          fetchEngagements={fetchEngagements}
           createActive={createActive}
           updateActive={updateActive}
           toggleCreateOn={toggleCreateOn}
           toggleEditOn={toggleEditOn}
-          editActivity={editActivity}
+          editEngagement={editEngagement}
         />
       </Container>
     </>
   );
 };
 
-export default ActivityIndex;
+export default EngagementIndex;
 
 export const Container = styled.div`
   height: 220px;
   overflow: scroll;
   border: 3px solid #59328c;
   border-radius: 10px;
-  margin-bottom: 14px;
 `;

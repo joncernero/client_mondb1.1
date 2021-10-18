@@ -95,7 +95,7 @@ const ActivityCreate = (props: Props) => {
         </div>
       </form>
       <button type='submit' form='createActivity'>
-        Create Activity
+        Add Activity
       </button>
     </StyledModal>
   );

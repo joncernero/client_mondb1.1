@@ -40,7 +40,6 @@ const ActivityEdit = (props: Props) => {
   const [editUserId, setEditUserId] = useState(props.activityToUpdate.userId);
 
   const ActivityUpdate = (e: React.SyntheticEvent): void => {
-    console.log(props.activityToUpdate.id);
     e.preventDefault();
     fetch(`${APIURL}/activity/update/${props.activityToUpdate.id}`, {
       method: 'Put',
