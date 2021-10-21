@@ -3,7 +3,6 @@ import { Route, Redirect } from 'react-router-dom';
 import Dashboard from './Displays/Dashboard';
 import UserIndex from './Components/Contents/Users/UserIndex';
 import AccountDisplay from './Displays/AccountDisplay';
-import ActivityIndex from './Components/Contents/Activities/ActivityIndex';
 
 type Props = {
   sessionToken: string | null;
@@ -32,6 +31,7 @@ const Router = (props: Props) => {
     <>
       <Route path='/dashboard'>{protectedViews('dashboard')}</Route>
       <Route path='/user'>{protectedViews('user')}</Route>
+      {/* change to accountId */}
       <Route path='/account/:id'>{protectedViews('accountdisplay')}</Route>
     </>
   );

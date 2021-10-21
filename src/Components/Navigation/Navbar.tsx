@@ -51,7 +51,7 @@ export const NavContainer = styled.div`
   background-color: #f3eef9;
   width: 25vw;
   height: 100vh;
-  margin: -15px -15px;
+  margin: -46px -15px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

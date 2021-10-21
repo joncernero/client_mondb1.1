@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import APIURL from '../../../Utilities/Environments';
 import SingleAccountDisplay from './SingleAccountDisplay';
 import { useParams } from 'react-router-dom';
-import styled from 'styled-components';
+import { Spinner } from '../../Styles/Spinner';
 
 type Account = {
   id: string;
@@ -67,7 +67,7 @@ const SingleViewIndex = (props: Props) => {
 
   const showLoading = () => {
     if (isLoading) {
-      return <h1>fetching</h1>;
+      return <Spinner />;
     }
   };
 

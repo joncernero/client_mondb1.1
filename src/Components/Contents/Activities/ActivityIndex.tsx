@@ -3,6 +3,7 @@ import APIURL from '../../../Utilities/Environments';
 import ActivityTable from './ActivityTable';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
+import { Spinner } from '../../Styles/Spinner';
 
 type Activity = {
   id: string;
@@ -14,7 +15,6 @@ type Activity = {
 
 type Props = {
   token: string | null;
-  id?: string;
 };
 
 const ActivityIndex = (props: Props) => {
@@ -32,10 +32,8 @@ const ActivityIndex = (props: Props) => {
   });
   const [isLoading, setIsLoading] = useState(true);
 
-  let accountId = id;
-
   const fetchActivities = () => {
-    fetch(`${APIURL}/activity/${accountId}`, {
+    fetch(`${APIURL}/activity/${id}`, {
       method: 'Get',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -65,7 +63,7 @@ const ActivityIndex = (props: Props) => {
 
   const showLoading = () => {
     if (isLoading) {
-      return <h1>fetching</h1>;
+      return <Spinner />;
     }
   };
   const fetchUsers = () => {
@@ -112,7 +110,5 @@ export default ActivityIndex;
 export const Container = styled.div`
   height: 220px;
   overflow: scroll;
-  border: 3px solid #59328c;
-  border-radius: 10px;
-  margin-bottom: 14px;
+  width: 100%;
 `;

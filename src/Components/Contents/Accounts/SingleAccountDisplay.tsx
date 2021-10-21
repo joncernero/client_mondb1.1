@@ -137,18 +137,11 @@ export const Container = styled.div`
   padding: 10px;
   width: 100%;
 
-  div {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    margin: 5px;
-  }
-
   div:not(:first-child) {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    margin: 5px;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 10px;
   }
 
   div:nth-child(10) {
@@ -156,22 +149,19 @@ export const Container = styled.div`
   }
 
   label {
-    align-self: flex-start;
-    margin-bottom: 0.5em;
     color: #59328c;
-    text-align: left;
     font-weight: bold;
   }
 
   h1 {
     color: #59328c;
-    align-self: flex-start;
     margin: 10px 0;
+    text-align: center;
   }
 
   p {
     color: #000000;
-    margin: 0 0 0 5px;
+    margin: 0 0 0 0;
   }
 
   button {

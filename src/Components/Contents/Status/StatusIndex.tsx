@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import APIURL from '../../../Utilities/Environments';
-import EngagementTable from './EngageTable';
-import styled from 'styled-components';
+import StatusDisplay from './StatusDisplay';
 import { useParams } from 'react-router-dom';
 import { Spinner } from '../../Styles/Spinner';
 
-type Engagement = {
+type Status = {
   id: string;
-  engagementNote: string;
-  date: string;
+  atRiskAtOnset: string;
+  accountState: string;
+  introStatus: string;
+  health: string;
+  churnDate: string;
+  closeNotes: string;
   accountId: string;
 };
 
@@ -17,23 +20,27 @@ type Props = {
   id?: string;
 };
 
-const EngagementIndex = (props: Props) => {
-  const [engagements, setEngagements] = useState([]);
+const StatusIndex = (props: Props) => {
+  const [status, setStatus] = useState([]);
   const [updateActive, setUpdateActive] = useState(false);
   const [createActive, setCreateActive] = useState(false);
   const { id } = useParams<{ id?: string }>();
-  const [engagementToUpdate, setEngagementToUpdate] = useState({
+  const [statusToUpdate, setStatusToUpdate] = useState({
     id: '',
-    engagementNote: '',
-    date: '',
+    atRiskAtOnset: '',
+    accountState: '',
+    introStatus: '',
+    health: '',
+    churnDate: '',
+    closeNotes: '',
     accountId: '',
   });
   const [isLoading, setIsLoading] = useState(true);
 
   let accountId = id;
 
-  const fetchEngagements = () => {
-    fetch(`${APIURL}/engagement/${accountId}`, {
+  const fetchStatus = () => {
+    fetch(`${APIURL}/status/${accountId}`, {
       method: 'Get',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -41,16 +48,16 @@ const EngagementIndex = (props: Props) => {
       }),
     })
       .then((res) => res.json())
-      .then((engagement) => {
-        setEngagements(engagement);
+      .then((status) => {
+        setStatus(status);
       })
       .finally(() => {
         setIsLoading(false);
       });
   };
 
-  const editEngagement = (engagement: Engagement) => {
-    setEngagementToUpdate(engagement);
+  const editStatus = (status: Status) => {
+    setStatusToUpdate(status);
   };
 
   const toggleEditOn = () => {
@@ -68,31 +75,26 @@ const EngagementIndex = (props: Props) => {
   };
 
   useEffect(() => {
-    fetchEngagements();
+    fetchStatus();
   }, []);
 
   return (
     <>
-      <Container>
-        {showLoading()}
-        <EngagementTable
-          token={props.token || ''}
-          engagements={engagements}
-          fetchEngagements={fetchEngagements}
-          createActive={createActive}
-          updateActive={updateActive}
+      {showLoading()}
+      <>
+        <StatusDisplay
+          token={props.token}
+          status={status}
+          fetchStatus={fetchStatus}
+          editStatus={editStatus}
           toggleCreateOn={toggleCreateOn}
           toggleEditOn={toggleEditOn}
-          editEngagement={editEngagement}
+          createActive={createActive}
+          updateActive={updateActive}
         />
-      </Container>
+      </>
     </>
   );
 };
 
-export default EngagementIndex;
-
-export const Container = styled.div`
-  height: 220px;
-  overflow: scroll;
-`;
+export default StatusIndex;

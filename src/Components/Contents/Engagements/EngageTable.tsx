@@ -86,7 +86,7 @@ const EngagementTable = (props: Props) => {
         <Table>
           <thead>
             <tr>
-              <th scope='col'>Engagement</th>
+              <th scope='col'>Engagements</th>
               <th scope='col'>Date</th>
               <th scope='col'></th>
               <th scope='col'></th>
@@ -128,7 +128,7 @@ export const Table = styled.table`
   table-layout: fixed;
   width: 100%;
   height: 200px;
-  padding: 5px 25px 25px 25px;
+  padding: 5px 5px 25px 5px;
   border-collapse: separate;
   border-spacing: 0;
 

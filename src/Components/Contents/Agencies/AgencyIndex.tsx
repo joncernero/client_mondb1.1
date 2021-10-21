@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import APIURL from '../../../Utilities/Environments';
 
-const AgencyIndex = () => {
+type Props = {
+  token: string | null;
+};
+
+const AgencyIndex = (props: Props) => {
   const [agencies, setAgencies] = useState([]);
 
   const fetchAgencies = () => {
@@ -21,6 +25,8 @@ const AgencyIndex = () => {
   useEffect(() => {
     fetchAgencies();
   }, []);
+
+  return <h1>Agency</h1>;
 };
 
 export default AgencyIndex;

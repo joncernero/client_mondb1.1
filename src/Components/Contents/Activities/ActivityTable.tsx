@@ -3,6 +3,7 @@ import APIURL from '../../../Utilities/Environments';
 import ActivityCreate from './ActivityCreate';
 import ActivityEdit from './ActivityEdit';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
 import * as FiIcons from 'react-icons/fi';
 
 type User = {
@@ -31,14 +32,16 @@ type Props = {
   createActive: boolean;
   updateActive: boolean;
   toggleCreateOn: Function;
-  toggleEditOn: Function;
+  toggleEditOn: () => void;
   editActivity: Function;
+  id?: string;
 };
 
 const ActivityTable = (props: Props) => {
   const [editingActivity, setEditingActivity] = useState<
     Activity | undefined
   >();
+  const { id } = useParams<{ id?: string }>();
 
   const DeleteActivity = (activity: Activity) => {
     console.log(activity.id);
@@ -57,35 +60,40 @@ const ActivityTable = (props: Props) => {
   };
 
   const ActivityMapper = () => {
-    return props.activities.map((activity: Activity, index) => {
-      return (
-        <tr key={index}>
-          <td>{activity.activityNotes}</td>
-          <td>{FormatDate(activity.dueDate)}</td>
-          <td>
-            {props.users.map((user: User) => {
-              return user.id === activity.userId ? user.campaignManager : null;
-            })}
-          </td>
-          <td>
-            <FiIcons.FiEdit2
-              onClick={() => {
-                setEditingActivity(activity);
-                props.editActivity();
-                props.toggleEditOn();
-              }}
-            />
-          </td>
-          <td>
-            <FiIcons.FiTrash
-              onClick={() => {
-                DeleteActivity(activity);
-              }}
-            />
-          </td>
-        </tr>
-      );
-    });
+    console.log(props.activities);
+    return props.activities.length > 0
+      ? props.activities.map((activity: Activity, index) => {
+          return (
+            <tr key={index}>
+              <td>{activity.activityNotes}</td>
+              <td>{FormatDate(activity.dueDate)}</td>
+              <td>
+                {props.users.map((user: User) => {
+                  return user.id === activity.userId
+                    ? user.campaignManager
+                    : null;
+                })}
+              </td>
+              <td>
+                <FiIcons.FiEdit2
+                  onClick={() => {
+                    setEditingActivity(activity);
+                    props.editActivity();
+                    props.toggleEditOn();
+                  }}
+                />
+              </td>
+              <td>
+                <FiIcons.FiTrash
+                  onClick={() => {
+                    DeleteActivity(activity);
+                  }}
+                />
+              </td>
+            </tr>
+          );
+        })
+      : null;
   };
 
   return (
@@ -149,7 +157,7 @@ export const Table = styled.table`
   table-layout: fixed;
   width: 100%;
   height: 200px;
-  padding: 5px 25px 25px 25px;
+  padding: 5px 5px 10px 5px;
   border-collapse: separate;
   border-spacing: 0;
 
