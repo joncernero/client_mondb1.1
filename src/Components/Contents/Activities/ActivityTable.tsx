@@ -51,7 +51,9 @@ const ActivityTable = (props: Props) => {
         'Content-Type': 'application/json',
         Authorization: `${localStorage.getItem('token')}`,
       }),
-    }).then(() => props.fetchActivities());
+    })
+      .then(() => props.fetchActivities())
+      .then((error) => console.log(error));
   };
 
   const FormatDate = (date: any) => {

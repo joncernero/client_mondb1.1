@@ -1,64 +1,60 @@
 import React, { useState } from 'react';
 import APIURL from '../../../Utilities/Environments';
-import Register from '../../Authorization/Register';
-import UserEdit from './UserEdit';
+import AgencyCreate from './AgencyCreate';
+import AgencyEdit from './AgencyEdit';
 import styled from 'styled-components';
 import * as FiIcons from 'react-icons/fi';
 
-type User = {
+type Agency = {
   id: string;
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  campaignManager: string;
-  role: string;
+  agencyName: string;
 };
 
 type Props = {
-  token: string | null;
-  users: User[];
-  fetchUsers: Function;
-  editUser: Function;
-  updateActive: boolean;
-  toggleCreateOn: Function;
+  token: string;
+  agencies: Agency[];
+  fetchAgencies: Function;
   createActive: boolean;
+  updateActive: boolean;
+  toggleCreateOn: () => void;
+  toggleEditOn: () => void;
+  editAgency: Function;
 };
 
-const UserTable = (props: Props) => {
-  const [editingUser, setEditingUser] = useState<User | undefined>();
-  const [updateActive, setUpdateActive] = useState(false);
+const AgencyTable = (props: Props) => {
+  const [editingAgency, setEditingAgency] = useState<Agency | undefined>();
 
-  const deleteUser = (user: User) => {
-    fetch(`${APIURL}/user/delete/${user.id}`, {
+  const deleteAgency = (agency: Agency) => {
+    fetch(`${APIURL}/agency/delete/${agency.id}`, {
       method: 'Delete',
       headers: new Headers({
         'Content-Type': 'application/json',
         Authorization: `${localStorage.getItem('token')}`,
       }),
-    }).then(() => props.fetchUsers());
+    })
+      .then(() => props.fetchAgencies())
+      .catch((error) => console.log(error));
   };
 
-  const UsersMapper = () => {
-    return props.users.map((user: User, index) => {
+  const AgencyMapper = () => {
+    console.log(props.agencies);
+    return props.agencies.map((agency: Agency, index) => {
       return (
         <tr key={index}>
-          <td>{user.campaignManager}</td>
-          <td>{user.email}</td>
-          <td>{user.role}</td>
+          <td>{agency.agencyName}</td>
           <td>
             <FiIcons.FiEdit2
               onClick={() => {
-                setEditingUser(user);
-                props.editUser(user);
-                toggleEditOn();
+                setEditingAgency(agency);
+                props.editAgency(agency);
+                props.toggleEditOn();
               }}
             />
           </td>
           <td>
             <FiIcons.FiTrash
               onClick={() => {
-                deleteUser(user);
+                deleteAgency(agency);
               }}
             />
           </td>
@@ -67,51 +63,47 @@ const UserTable = (props: Props) => {
     });
   };
 
-  const toggleEditOn = () => {
-    setUpdateActive(!updateActive);
-  };
   return (
     <>
       {props.createActive ? (
-        <Register
+        <AgencyCreate
           token={props.token}
-          fetchUsers={props.fetchUsers}
+          fetchAgencies={props.fetchAgencies}
           toggleCreateOn={props.toggleCreateOn}
         />
       ) : null}
-      <UserContainer>
+      <AgencyContainer>
         <div>
-          <h1>Campaign Managers</h1>
+          <h1>Agencies</h1>
           <FiIcons.FiPlusSquare onClick={() => props.toggleCreateOn()} />
         </div>
         <Table>
           <thead>
             <tr>
-              <th scope='col'>Name</th>
-              <th scope='col'>Email</th>
-              <th scope='col'>Role</th>
+              <th scope='col'>Agency Name:</th>
               <th scope='col'></th>
               <th scope='col'></th>
             </tr>
           </thead>
-          <tbody>{UsersMapper()}</tbody>
+          <tbody>{AgencyMapper()}</tbody>
         </Table>
-        {props.updateActive && editingUser ? (
-          <UserEdit
-            userToUpdate={editingUser}
-            token={props.token}
-            editUser={props.editUser}
-            fetchUsers={props.fetchUsers}
-          />
-        ) : null}
-      </UserContainer>
+      </AgencyContainer>
+      {props.updateActive && editingAgency ? (
+        <AgencyEdit
+          agencyToUpdate={editingAgency}
+          token={props.token}
+          editAgency={props.editAgency}
+          fetchAgencies={props.fetchAgencies}
+          toggleEditOn={props.toggleEditOn}
+        />
+      ) : null}
     </>
   );
 };
 
-export default UserTable;
+export default AgencyTable;
 
-const UserContainer = styled.div`
+export const AgencyContainer = styled.div`
   display: flex;
   flex-direction: column;
 
@@ -123,7 +115,6 @@ const UserContainer = styled.div`
     color: #59328c;
   }
 `;
-
 export const Table = styled.table`
   table-layout: fixed;
   width: 100%;
@@ -139,11 +130,11 @@ export const Table = styled.table`
 
   thead th:nth-child(1) {
     text-align: left;
-    width: 30%;
+    width: 50%;
   }
 
   thead th:nth-child(2) {
-    width: 35%;
+    width: 10%;
   }
 
   thead th:nth-child(3) {

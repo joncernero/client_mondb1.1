@@ -1,64 +1,73 @@
 import React, { useState } from 'react';
 import APIURL from '../../../Utilities/Environments';
-import Register from '../../Authorization/Register';
-import UserEdit from './UserEdit';
+import IoCreate from './IoCreate';
+import IoEdit from './IoEdit';
 import styled from 'styled-components';
 import * as FiIcons from 'react-icons/fi';
 
-type User = {
+type Agency = {
   id: string;
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  campaignManager: string;
-  role: string;
+  agencyName: string;
+};
+
+type Io = {
+  id: string;
+  agencyIO: string;
+  ioSpend: number;
+  agencyId: string;
 };
 
 type Props = {
-  token: string | null;
-  users: User[];
-  fetchUsers: Function;
-  editUser: Function;
-  updateActive: boolean;
-  toggleCreateOn: Function;
+  token: string;
+  ios: Io[];
+  fetchIos: Function;
   createActive: boolean;
+  updateActive: boolean;
+  toggleCreateOn: () => void;
+  toggleEditOn: () => void;
+  editIo: Function;
+  agencies: Agency[];
 };
 
-const UserTable = (props: Props) => {
-  const [editingUser, setEditingUser] = useState<User | undefined>();
-  const [updateActive, setUpdateActive] = useState(false);
+const IoTable = (props: Props) => {
+  const [editingIo, setEditingIo] = useState<Io | undefined>();
 
-  const deleteUser = (user: User) => {
-    fetch(`${APIURL}/user/delete/${user.id}`, {
+  const deleteIO = (io: Io) => {
+    fetch(`${APIURL}/io/delete/${io.id}`, {
       method: 'Delete',
       headers: new Headers({
         'Content-Type': 'application/json',
         Authorization: `${localStorage.getItem('token')}`,
       }),
-    }).then(() => props.fetchUsers());
+    })
+      .then(() => props.fetchIos())
+      .catch((error) => console.log(error));
   };
 
-  const UsersMapper = () => {
-    return props.users.map((user: User, index) => {
+  const IoMapper = () => {
+    return props.ios.map((io: Io, index) => {
       return (
         <tr key={index}>
-          <td>{user.campaignManager}</td>
-          <td>{user.email}</td>
-          <td>{user.role}</td>
+          <td>{io.agencyIO}</td>
+          <td>{io.ioSpend}</td>
+          <td>
+            {props.agencies.map((agency: Agency) => {
+              return agency.id === io.agencyId ? agency.agencyName : null;
+            })}
+          </td>
           <td>
             <FiIcons.FiEdit2
               onClick={() => {
-                setEditingUser(user);
-                props.editUser(user);
-                toggleEditOn();
+                setEditingIo(io);
+                props.editIo(io);
+                props.toggleEditOn();
               }}
             />
           </td>
           <td>
             <FiIcons.FiTrash
               onClick={() => {
-                deleteUser(user);
+                deleteIO(io);
               }}
             />
           </td>
@@ -67,51 +76,50 @@ const UserTable = (props: Props) => {
     });
   };
 
-  const toggleEditOn = () => {
-    setUpdateActive(!updateActive);
-  };
   return (
     <>
       {props.createActive ? (
-        <Register
+        <IoCreate
           token={props.token}
-          fetchUsers={props.fetchUsers}
+          fetchIos={props.fetchIos}
           toggleCreateOn={props.toggleCreateOn}
         />
       ) : null}
-      <UserContainer>
+      <IoContainer>
         <div>
-          <h1>Campaign Managers</h1>
+          <h1>Insertion Orders</h1>
           <FiIcons.FiPlusSquare onClick={() => props.toggleCreateOn()} />
         </div>
         <Table>
           <thead>
             <tr>
-              <th scope='col'>Name</th>
-              <th scope='col'>Email</th>
-              <th scope='col'>Role</th>
+              <th scope='col'>IO #:</th>
+              <th scope='col'>IoSpend:</th>
+              <th scope='col'>Agency:</th>
               <th scope='col'></th>
               <th scope='col'></th>
             </tr>
           </thead>
-          <tbody>{UsersMapper()}</tbody>
+          <tbody>{IoMapper()}</tbody>
         </Table>
-        {props.updateActive && editingUser ? (
-          <UserEdit
-            userToUpdate={editingUser}
-            token={props.token}
-            editUser={props.editUser}
-            fetchUsers={props.fetchUsers}
-          />
-        ) : null}
-      </UserContainer>
+      </IoContainer>
+      {props.updateActive && editingIo ? (
+        <IoEdit
+          ioToUpdate={editingIo}
+          token={props.token}
+          editIo={props.editIo}
+          fetchIos={props.fetchIos}
+          toggleEditOn={props.toggleEditOn}
+          agencies={props.agencies}
+        />
+      ) : null}
     </>
   );
 };
 
-export default UserTable;
+export default IoTable;
 
-const UserContainer = styled.div`
+export const IoContainer = styled.div`
   display: flex;
   flex-direction: column;
 
@@ -123,7 +131,6 @@ const UserContainer = styled.div`
     color: #59328c;
   }
 `;
-
 export const Table = styled.table`
   table-layout: fixed;
   width: 100%;
@@ -139,15 +146,15 @@ export const Table = styled.table`
 
   thead th:nth-child(1) {
     text-align: left;
-    width: 30%;
+    width: 25%;
   }
 
   thead th:nth-child(2) {
-    width: 35%;
+    width: 15%;
   }
 
   thead th:nth-child(3) {
-    width: 10%;
+    width: 15%;
   }
 
   tbody tr {

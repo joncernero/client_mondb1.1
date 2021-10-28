@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Register from '../../Authorization/Register';
 import UserTable from './UserTable';
+import AgencyIndex from '../Agencies/AgencyIndex';
+import IoIndex from '../InsertionOrder/IoIndex';
 import APIURL from '../../../Utilities/Environments';
 import styled from 'styled-components';
 
@@ -20,6 +21,7 @@ type Props = {
 
 const UserIndex = (props: Props) => {
   const [users, setUsers] = useState([]);
+  const [createActive, setCreateActive] = useState(false);
   const [updateActive, setUpdateActive] = useState(false);
   const [userToUpdate, setUserToUpdate] = useState({
     id: '',
@@ -49,6 +51,10 @@ const UserIndex = (props: Props) => {
     setUserToUpdate(user);
   };
 
+  const toggleCreateOn = () => {
+    setCreateActive(!createActive);
+  };
+
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -57,17 +63,22 @@ const UserIndex = (props: Props) => {
     <>
       <Container>
         <ChildOne>
-          <Register token={props.token} fetchUsers={fetchUsers} />
-        </ChildOne>
-        <ChildTwo>
           <UserTable
             users={users}
             token={props.token}
             fetchUsers={fetchUsers}
             updateActive={updateActive}
+            createActive={createActive}
+            toggleCreateOn={toggleCreateOn}
             editUser={editUser}
           />
+        </ChildOne>
+        <ChildTwo>
+          <AgencyIndex token={props.token} />
         </ChildTwo>
+        <ChildThree>
+          <IoIndex token={props.token} />
+        </ChildThree>
       </Container>
     </>
   );
@@ -79,23 +90,42 @@ export const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   justify-items: center;
-  row-gap: 175px;
+  /* row-gap: 175px; */
   grid-template-areas:
-    'one one'
-    'two two';
+    'one two'
+    'three two';
   height: 90vh;
   width: auto;
   padding: 10px;
+  margin: 0 50px 0 50px;
 `;
 
 export const ChildOne = styled.div`
   grid-area: one;
-  height: 10vh;
-  width: 60vw;
-  /* margin: 10px 25px; */
+  width: 40vw;
+  height: 300px;
+  overflow: scroll;
+  border: 2px solid #59328c;
+  border-radius: 10px;
+  margin: 10px 25px;
 `;
+
 export const ChildTwo = styled.div`
   grid-area: two;
-  width: 60vw;
-  align-self: center;
+  width: 40vw;
+  height: 300px;
+  overflow: scroll;
+  border: 2px solid #59328c;
+  border-radius: 10px;
+  margin: 10px 25px;
+`;
+
+export const ChildThree = styled.div`
+  grid-area: three;
+  width: 40vw;
+  height: 300px;
+  overflow: scroll;
+  border: 2px solid #59328c;
+  border-radius: 10px;
+  margin: 10px 25px;
 `;
