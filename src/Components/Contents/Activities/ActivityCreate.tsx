@@ -19,7 +19,6 @@ type Props = {
   fetchActivities: Function;
   toggleCreateOn: Function;
   users: User[];
-  id?: string;
 };
 
 const ActivityCreate = (props: Props) => {
@@ -29,14 +28,13 @@ const ActivityCreate = (props: Props) => {
   const [userId, setUserId] = useState('');
 
   const fetchActivityData = (e: React.SyntheticEvent): void => {
-    let accountId = id;
     e.preventDefault();
     fetch(`${APIURL}/activity/create`, {
       method: 'Post',
       body: JSON.stringify({
         activityNotes: activityNotes,
         dueDate: dueDate,
-        accountId: accountId,
+        accountId: id,
         userId: userId,
       }),
       headers: new Headers({

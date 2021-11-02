@@ -14,7 +14,6 @@ type Engagement = {
 
 type Props = {
   token: string | null;
-  id?: string;
 };
 
 const EngagementIndex = (props: Props) => {
@@ -30,10 +29,8 @@ const EngagementIndex = (props: Props) => {
   });
   const [isLoading, setIsLoading] = useState(true);
 
-  let accountId = id;
-
   const fetchEngagements = () => {
-    fetch(`${APIURL}/engagement/${accountId}`, {
+    fetch(`${APIURL}/engagement/${id}`, {
       method: 'Get',
       headers: new Headers({
         'Content-Type': 'application/json',

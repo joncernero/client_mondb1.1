@@ -42,7 +42,7 @@ const StatusEdit = (props: Props) => {
         closeNotes: editCloseNotes,
       }),
       headers: new Headers({
-        'Content-type': 'application/json',
+        'Content-Type': 'application/json',
         Authorization: `${localStorage.getItem('token')}`,
       }),
     })
@@ -86,7 +86,7 @@ const StatusEdit = (props: Props) => {
         <AiIcons.AiOutlineClose />
       </ModalClose>
       <form onSubmit={StatusUpdate}>
-        <h1>Add Account Status</h1>
+        <h1>Update Account Status</h1>
         <div>
           <label htmlFor='atRiskAtOnset'>At-Risk-At-Onset:</label>
           <select onChange={(e) => setEditAtRiskAtOnset(e.target.value)}>

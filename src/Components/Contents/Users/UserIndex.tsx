@@ -90,42 +90,39 @@ export const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   justify-items: center;
-  /* row-gap: 175px; */
+  row-gap: 10px;
+  column-gap: 20px;
   grid-template-areas:
     'one two'
     'three two';
   height: 90vh;
   width: auto;
-  padding: 10px;
-  margin: 0 50px 0 50px;
+  padding: 0 100px 0 100px;
 `;
 
 export const ChildOne = styled.div`
   grid-area: one;
-  width: 40vw;
+  width: 100%;
   height: 300px;
   overflow: scroll;
   border: 2px solid #59328c;
   border-radius: 10px;
-  margin: 10px 25px;
 `;
 
 export const ChildTwo = styled.div`
   grid-area: two;
-  width: 40vw;
+  width: 100%;
   height: 300px;
   overflow: scroll;
   border: 2px solid #59328c;
   border-radius: 10px;
-  margin: 10px 25px;
 `;
 
 export const ChildThree = styled.div`
   grid-area: three;
-  width: 40vw;
+  width: 100%;
   height: 300px;
   overflow: scroll;
   border: 2px solid #59328c;
   border-radius: 10px;
-  margin: 10px 25px;
 `;

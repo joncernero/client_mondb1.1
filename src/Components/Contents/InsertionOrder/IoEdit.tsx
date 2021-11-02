@@ -11,6 +11,7 @@ type Agency = {
 type Io = {
   id: string;
   agencyIO: string;
+  ioBudget: number;
   ioSpend: number;
   agencyId: string;
 };
@@ -27,6 +28,7 @@ type Props = {
 const IoEdit = (props: Props) => {
   const [agencies, setAgencies] = useState([]);
   const [editAgencyIO, setEditAgencyIO] = useState(props.ioToUpdate.agencyIO);
+  const [editIoBudget, setEditIoBudget] = useState(props.ioToUpdate.ioBudget);
   const [editIoSpend, setEditIoSpend] = useState(props.ioToUpdate.ioSpend);
   const [editAgencyId, setEditAgencyId] = useState(props.ioToUpdate.agencyId);
 
@@ -36,6 +38,7 @@ const IoEdit = (props: Props) => {
       method: 'Put',
       body: JSON.stringify({
         agencyIO: editAgencyIO,
+        ioBudget: editIoBudget,
         ioSpend: editIoSpend,
       }),
       headers: new Headers({
@@ -84,6 +87,14 @@ const IoEdit = (props: Props) => {
             name='agencyIO'
             value={editAgencyIO}
             onChange={(e) => setEditAgencyIO(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor='ioBudget'>IO Spend:</label>
+          <input
+            name='ioSpend'
+            value={editIoBudget}
+            onChange={(e) => setEditIoBudget(Number(e.target.value))}
           />
         </div>
         <div>

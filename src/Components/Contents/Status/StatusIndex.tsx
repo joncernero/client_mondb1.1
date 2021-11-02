@@ -17,7 +17,6 @@ type Status = {
 
 type Props = {
   token: string | null;
-  id?: string;
 };
 
 const StatusIndex = (props: Props) => {
@@ -37,10 +36,8 @@ const StatusIndex = (props: Props) => {
   });
   const [isLoading, setIsLoading] = useState(true);
 
-  let accountId = id;
-
   const fetchStatus = () => {
-    fetch(`${APIURL}/status/${accountId}`, {
+    fetch(`${APIURL}/status/${id}`, {
       method: 'Get',
       headers: new Headers({
         'Content-Type': 'application/json',

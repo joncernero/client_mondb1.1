@@ -7,6 +7,7 @@ import { Spinner } from '../../Styles/Spinner';
 type Io = {
   id: string;
   agencyIO: string;
+  ioBudget: number;
   ioSpend: number;
   agencyId: string;
 };
@@ -23,6 +24,7 @@ function IoIndex(props: Props) {
   const [ioToUpdate, setIoToUpdate] = useState({
     id: '',
     agencyIO: '',
+    ioBudget: 0,
     ioSpend: 0,
     agencyId: '',
   });

@@ -13,6 +13,7 @@ type Agency = {
 type Io = {
   id: string;
   agencyIO: string;
+  ioBudget: number;
   ioSpend: number;
   agencyId: string;
 };
@@ -49,6 +50,7 @@ const IoTable = (props: Props) => {
       return (
         <tr key={index}>
           <td>{io.agencyIO}</td>
+          <td>{io.ioBudget}</td>
           <td>{io.ioSpend}</td>
           <td>
             {props.agencies.map((agency: Agency) => {
@@ -94,6 +96,7 @@ const IoTable = (props: Props) => {
           <thead>
             <tr>
               <th scope='col'>IO #:</th>
+              <th scope='col'>IoBudget:</th>
               <th scope='col'>IoSpend:</th>
               <th scope='col'>Agency:</th>
               <th scope='col'></th>
@@ -146,15 +149,15 @@ export const Table = styled.table`
 
   thead th:nth-child(1) {
     text-align: left;
-    width: 25%;
+    width: 20%;
   }
 
   thead th:nth-child(2) {
-    width: 15%;
+    width: 20%;
   }
 
   thead th:nth-child(3) {
-    width: 15%;
+    width: 20%;
   }
 
   tbody tr {

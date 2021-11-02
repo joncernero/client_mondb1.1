@@ -3,7 +3,6 @@ import APIURL from '../../../Utilities/Environments';
 import ActivityCreate from './ActivityCreate';
 import ActivityEdit from './ActivityEdit';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
 import * as FiIcons from 'react-icons/fi';
 
 type User = {
@@ -31,17 +30,15 @@ type Props = {
   fetchActivities: Function;
   createActive: boolean;
   updateActive: boolean;
-  toggleCreateOn: Function;
+  toggleCreateOn: () => void;
   toggleEditOn: () => void;
   editActivity: Function;
-  id?: string;
 };
 
 const ActivityTable = (props: Props) => {
   const [editingActivity, setEditingActivity] = useState<
     Activity | undefined
   >();
-  const { id } = useParams<{ id?: string }>();
 
   const DeleteActivity = (activity: Activity) => {
     console.log(activity.id);

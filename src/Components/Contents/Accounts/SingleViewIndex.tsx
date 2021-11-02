@@ -18,7 +18,6 @@ type Account = {
 
 type Props = {
   token: string | null;
-  id?: string;
 };
 
 const SingleViewIndex = (props: Props) => {

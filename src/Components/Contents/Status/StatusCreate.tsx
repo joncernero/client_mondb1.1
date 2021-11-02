@@ -8,7 +8,6 @@ type Props = {
   token: string | null;
   fetchStatus: Function;
   toggleCreateOn: Function;
-  id?: string;
 };
 
 const StatusCreate = (props: Props) => {
@@ -22,7 +21,6 @@ const StatusCreate = (props: Props) => {
   const [accountId, setAccountId] = useState('');
 
   const fetchStatusData = (e: React.SyntheticEvent): void => {
-    let accountId = id;
     e.preventDefault();
     fetch(`${APIURL}/status/create`, {
       method: 'Post',
@@ -33,7 +31,7 @@ const StatusCreate = (props: Props) => {
         health: health,
         churnDate: churnDate,
         closeNotes: closeNotes,
-        accountId: accountId,
+        accountId: id,
       }),
       headers: new Headers({
         'Content-Type': 'application/json',

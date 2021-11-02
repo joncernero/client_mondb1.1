@@ -8,7 +8,6 @@ type Props = {
   token: string | null;
   fetchEngagements: Function;
   toggleCreateOn: Function;
-  id?: string;
 };
 
 const EngagementCreate = (props: Props) => {
@@ -18,14 +17,13 @@ const EngagementCreate = (props: Props) => {
   const [accountId, setAccountId] = useState('');
 
   const fetchEngagementData = (e: React.SyntheticEvent): void => {
-    let accountId = id;
     e.preventDefault();
     fetch(`${APIURL}/engagement/create`, {
       method: 'Post',
       body: JSON.stringify({
         engagementNote: engagementNote,
         date: date,
-        accountId: accountId,
+        accountId: id,
       }),
       headers: new Headers({
         'Content-Type': 'application/json',
