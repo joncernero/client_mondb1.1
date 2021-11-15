@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import APIURL from '../../../Utilities/Environments';
-import { StyledModal, ModalClose } from '../../Styles/Modal';
+import { StyledModal, ModalClose, Title } from '../../Styles/Modal';
 import * as AiIcons from 'react-icons/ai';
 
 type Agency = {
@@ -92,15 +92,18 @@ const AccountUpdate = (props: Props) => {
   };
 
   return (
+    //fixed
     <StyledModal>
-      <ModalClose
-        onClick={() => {
-          props.toggleEditOn();
-        }}>
-        <AiIcons.AiOutlineClose />
-      </ModalClose>
-      <form onSubmit={accountUpdate} id='updateAccount'>
+      <Title>
         <h1>{`Update ${props.accountToUpdate.accountName}`}</h1>
+        <ModalClose
+          onClick={() => {
+            props.toggleEditOn();
+          }}>
+          <AiIcons.AiOutlineClose />
+        </ModalClose>
+      </Title>
+      <form onSubmit={accountUpdate} id='updateAccount'>
         <div>
           <label htmlFor='accountName'>AccountName:</label>
           <input
@@ -137,6 +140,7 @@ const AccountUpdate = (props: Props) => {
           <label htmlFor='assignmentDate'>Assignment Date:</label>
           <input
             name='assignmentDate'
+            type='date'
             value={editAssignmentDate}
             onChange={(e) => setEditAssignmentDate(e.target.value)}
           />

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyledModal, ModalClose } from '../../Styles/Modal';
+import { StyledModal, ModalClose, Title } from '../../Styles/Modal';
 import APIURL from '../../../Utilities/Environments';
 import * as AiIcons from 'react-icons/ai';
 
@@ -18,6 +18,7 @@ type Props = {
   editUser: Function;
   userToUpdate: User;
   fetchUsers: Function;
+  toggleEditOn: () => void;
 };
 
 const UserEdit = (props: Props, user: User) => {
@@ -26,7 +27,6 @@ const UserEdit = (props: Props, user: User) => {
   const [editCampaignManager, setEditCampaignManager] = useState('');
   // const [editPassword, setEditPassword] = useState('');
   const [editRole, setEditRole] = useState('');
-  const [updateActive, setUpdateActive] = useState(false);
 
   const UserUpdate = (e: React.SyntheticEvent): void => {
     console.log(props.userToUpdate.firstName);
@@ -48,37 +48,39 @@ const UserEdit = (props: Props, user: User) => {
       .then(() => {
         props.fetchUsers();
         props.editUser();
-        toggleEditOn();
+        props.toggleEditOn();
       });
   };
 
-  const toggleEditOn = () => {
-    setUpdateActive(!updateActive);
-  };
-
   return (
-    <>
-      <StyledModal>
+    <StyledModal>
+      <Title>
+        <h1>{`Update ${props.userToUpdate.firstName}`}</h1>
         <ModalClose
           onClick={() => {
-            toggleEditOn();
+            props.toggleEditOn();
           }}>
           <AiIcons.AiOutlineClose />
         </ModalClose>
-        <form onSubmit={UserUpdate} id='editUser'>
-          <h1>{`Update ${props.userToUpdate.firstName}`}</h1>
+      </Title>
+      <form onSubmit={UserUpdate} id='editUser'>
+        <div>
           <label htmlFor='firstName'>Edit First Name:</label>
           <input
             name='name'
             value={editFirstName}
             onChange={(e) => setEditFirstName(e.target.value)}
           />
+        </div>
+        <div>
           <label htmlFor='lastName'>Edit Last Name:</label>
           <input
             name='lastName'
             value={editLastName}
             onChange={(e) => setEditLastName(e.target.value)}
           />
+        </div>
+        <div>
           <label htmlFor='role'>Edit Role:</label>
           <select
             onChange={(e) => setEditRole(e.target.value)}
@@ -89,12 +91,12 @@ const UserEdit = (props: Props, user: User) => {
             <option value='admin'>admin</option>
             <option value='user'>user</option>
           </select>
-        </form>
-        <button type='submit' form='editUser'>
-          Update
-        </button>
-      </StyledModal>
-    </>
+        </div>
+      </form>
+      <button type='submit' form='editUser'>
+        Update
+      </button>
+    </StyledModal>
   );
 };
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyledModal, ModalClose } from '../../Styles/Modal';
+import { StyledModal, ModalClose, Title } from '../../Styles/Modal';
 import APIURL from '../../../Utilities/Environments';
 import * as AiIcons from 'react-icons/ai';
 
@@ -73,14 +73,16 @@ const IoEdit = (props: Props) => {
 
   return (
     <StyledModal>
-      <ModalClose
-        onClick={() => {
-          props.toggleEditOn();
-        }}>
-        <AiIcons.AiOutlineClose />
-      </ModalClose>
-      <form onSubmit={IoUpdate} id='ioUpdate'>
+      <Title>
         <h1>Update IO</h1>
+        <ModalClose
+          onClick={() => {
+            props.toggleEditOn();
+          }}>
+          <AiIcons.AiOutlineClose />
+        </ModalClose>
+      </Title>
+      <form onSubmit={IoUpdate} id='ioUpdate'>
         <div>
           <label htmlFor='agencyIO'>IO #:</label>
           <input
@@ -90,9 +92,10 @@ const IoEdit = (props: Props) => {
           />
         </div>
         <div>
-          <label htmlFor='ioBudget'>IO Spend:</label>
+          <label htmlFor='ioBudget'>IO Budget:</label>
           <input
-            name='ioSpend'
+            name='ioBudget'
+            type='number'
             value={editIoBudget}
             onChange={(e) => setEditIoBudget(Number(e.target.value))}
           />
@@ -101,6 +104,7 @@ const IoEdit = (props: Props) => {
           <label htmlFor='ioSpend'>IO Spend:</label>
           <input
             name='ioSpend'
+            type='number'
             value={editIoSpend}
             onChange={(e) => setEditIoSpend(Number(e.target.value))}
           />

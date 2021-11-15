@@ -80,20 +80,23 @@ const EngagementTable = (props: Props) => {
         />
       ) : null}
       <EngageContainer>
-        <div>
+        <Title>
+          <h1>Engagements</h1>
           <FiIcons.FiPlusSquare onClick={() => props.toggleCreateOn()} />
-        </div>
-        <Table>
-          <thead>
-            <tr>
-              <th scope='col'>Engagements</th>
-              <th scope='col'>Date</th>
-              <th scope='col'></th>
-              <th scope='col'></th>
-            </tr>
-          </thead>
-          <tbody>{EngagementMapper()}</tbody>
-        </Table>
+        </Title>
+        <TableContainer>
+          <Table>
+            <thead>
+              <tr>
+                <th scope='col'>Engagements</th>
+                <th scope='col'>Date</th>
+                <th scope='col'></th>
+                <th scope='col'></th>
+              </tr>
+            </thead>
+            <tbody>{EngagementMapper()}</tbody>
+          </Table>
+        </TableContainer>
       </EngageContainer>
       {props.updateActive && editingEngagement ? (
         <EngagementEdit
@@ -112,16 +115,19 @@ export default EngagementTable;
 export const EngageContainer = styled.div`
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+`;
 
-  div {
-    align-self: flex-end;
-    margin: 10px 25px 5px 0;
-    font-size: 20px;
+export const Title = styled.div`
+  display: flex;
+  color: #59328c;
+  justify-content: space-between;
+  margin: 0 15px 15px 15px;
+`;
 
-    &:hover {
-      color: #c2abe1;
-    }
-  }
+export const TableContainer = styled.div`
+  overflow: hidden;
+  overflow-x: scroll;
 `;
 
 export const Table = styled.table`

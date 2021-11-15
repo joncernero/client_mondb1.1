@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import APIURL from '../../../Utilities/Environments';
-import { StyledModal, ModalClose } from '../../Styles/Modal';
+import { StyledModal, ModalClose, Title } from '../../Styles/Modal';
 import * as AiIcons from 'react-icons/ai';
 
 type Status = {
@@ -79,14 +79,16 @@ const StatusEdit = (props: Props) => {
 
   return (
     <StyledModal>
-      <ModalClose
-        onClick={() => {
-          props.toggleEditOn();
-        }}>
-        <AiIcons.AiOutlineClose />
-      </ModalClose>
-      <form onSubmit={StatusUpdate}>
+      <Title>
         <h1>Update Account Status</h1>
+        <ModalClose
+          onClick={() => {
+            props.toggleEditOn();
+          }}>
+          <AiIcons.AiOutlineClose />
+        </ModalClose>
+      </Title>
+      <form onSubmit={StatusUpdate} id='statusUpdate'>
         <div>
           <label htmlFor='atRiskAtOnset'>At-Risk-At-Onset:</label>
           <select onChange={(e) => setEditAtRiskAtOnset(e.target.value)}>
@@ -136,6 +138,7 @@ const StatusEdit = (props: Props) => {
             <label htmlFor='churnDate'>Churn Date:</label>
             <input
               name='churnDate'
+              type='date'
               value={editChurnDate}
               onChange={(e) => setEditChurnDate(e.target.value)}
             />
@@ -149,8 +152,10 @@ const StatusEdit = (props: Props) => {
             onChange={(e) => setEditCloseNotes(e.target.value)}
           />
         </div>
-        <button type='submit'>Add Status</button>
       </form>
+      <button type='submit' form='statusUpdate'>
+        Add Status
+      </button>
     </StyledModal>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import APIURL from '../../../Utilities/Environments';
-import { StyledModal, ModalClose } from '../../Styles/Modal';
+import { StyledModal, ModalClose, Title } from '../../Styles/Modal';
 import * as AiIcons from 'react-icons/ai';
 import { useParams } from 'react-router-dom';
 
@@ -80,14 +80,16 @@ const StatusCreate = (props: Props) => {
 
   return (
     <StyledModal>
-      <ModalClose
-        onClick={() => {
-          props.toggleCreateOn();
-        }}>
-        <AiIcons.AiOutlineClose />
-      </ModalClose>
-      <form onSubmit={fetchStatusData}>
+      <Title>
         <h1>Add Account Status</h1>
+        <ModalClose
+          onClick={() => {
+            props.toggleCreateOn();
+          }}>
+          <AiIcons.AiOutlineClose />
+        </ModalClose>
+      </Title>
+      <form onSubmit={fetchStatusData} id='statusCreate'>
         <div>
           <label htmlFor='atRiskAtOnset'>At-Risk-At-Onset:</label>
           <select onChange={(e) => setAtRiskAtOnset(e.target.value)}>
@@ -137,6 +139,7 @@ const StatusCreate = (props: Props) => {
             <label htmlFor='churnDate'>Churn Date:</label>
             <input
               name='churnDate'
+              type='date'
               value={churnDate}
               onChange={(e) => setChurnDate(e.target.value)}
             />
@@ -150,8 +153,10 @@ const StatusCreate = (props: Props) => {
             onChange={(e) => setCloseNotes(e.target.value)}
           />
         </div>
-        <button type='submit'>Add Status</button>
       </form>
+      <button type='submit' form='statusCreate'>
+        Add Status
+      </button>
     </StyledModal>
   );
 };

@@ -1,55 +1,52 @@
 import React, { useState } from 'react';
 import APIURL from '../../../Utilities/Environments';
-import ActivityCreate from './ActivityCreate';
-import ActivityEdit from './ActivityEdit';
+import BudgetCreate from './BudgetCreate';
+import BudgetEdit from './BudgetEdit';
 import styled from 'styled-components';
 import * as FiIcons from 'react-icons/fi';
 
-type User = {
+type Budget = {
   id: string;
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  campaignManager: string;
-  role: string;
-};
-
-type Activity = {
-  id: string;
-  activityNotes: string;
-  dueDate: string;
+  year: string;
+  month: string;
+  startDate: string;
+  endDate: string;
+  spendAsOf: string;
+  budgetAmount: number;
+  spendAmount: number;
+  credits: number;
+  dailyPacing: number;
+  actualPacing: number;
+  rollOver: number;
+  buPercentage: number;
   accountId: string;
-  userId: string;
+  orderId: string;
 };
 
 type Props = {
   token: string;
-  users: User[];
-  activities: Activity[];
-  fetchActivities: Function;
+  budgets: Budget[];
+  fetchBudgets: Function;
   createActive: boolean;
   updateActive: boolean;
   toggleCreateOn: () => void;
   toggleEditOn: () => void;
-  editActivity: Function;
+  editBudget: Function;
 };
 
-const ActivityTable = (props: Props) => {
-  const [editingActivity, setEditingActivity] = useState<
-    Activity | undefined
-  >();
+const BudgetTable = (props: Props) => {
+  const [editingBudget, setEditingBudget] = useState<Budget | undefined>();
 
-  const DeleteActivity = (activity: Activity) => {
-    console.log(activity.id);
-    fetch(`${APIURL}/activity/delete/${activity.id}`, {
+  const DeleteBudget = (budget: Budget) => {
+    console.log(budget.id);
+    fetch(`${APIURL}/order/delete/${budget.id}`, {
       method: 'Delete',
       headers: new Headers({
         'Content-Type': 'application/json',
         Authorization: `${localStorage.getItem('token')}`,
       }),
     })
-      .then(() => props.fetchActivities())
+      .then(() => props.fetchBudgets())
       .catch((error) => console.log(error));
   };
 
@@ -58,26 +55,27 @@ const ActivityTable = (props: Props) => {
     return new Intl.DateTimeFormat('en-US').format(dateObj);
   };
 
-  const ActivityMapper = () => {
-    console.log(props.activities);
-    return props.activities.length > 0
-      ? props.activities.map((activity: Activity, index) => {
+  const BudgetMapper = () => {
+    return props.budgets.length > 0
+      ? props.budgets.map((budget: Budget, index) => {
           return (
             <tr key={index}>
-              <td>{activity.activityNotes}</td>
-              <td>{FormatDate(activity.dueDate)}</td>
-              <td>
-                {props.users.map((user: User) => {
-                  return user.id === activity.userId
-                    ? user.campaignManager
-                    : null;
-                })}
-              </td>
+              <td>{budget.year}</td>
+              <td>{budget.month}</td>
+              <td>{FormatDate(budget.startDate)}</td>
+              <td>{FormatDate(budget.endDate)}</td>
+              <td>{FormatDate(budget.spendAsOf)}</td>
+              <td>{'$' + budget.budgetAmount}</td>
+              <td>{'$' + budget.spendAmount}</td>
+              <td>{'$' + budget.rollOver}</td>
+              <td>{'$' + budget.dailyPacing}</td>
+              <td>{'$' + budget.actualPacing}</td>
+              <td>{budget.buPercentage + '%'}</td>
               <td>
                 <FiIcons.FiEdit2
                   onClick={() => {
-                    setEditingActivity(activity);
-                    props.editActivity();
+                    setEditingBudget(budget);
+                    props.editBudget();
                     props.toggleEditOn();
                   }}
                 />
@@ -85,7 +83,7 @@ const ActivityTable = (props: Props) => {
               <td>
                 <FiIcons.FiTrash
                   onClick={() => {
-                    DeleteActivity(activity);
+                    DeleteBudget(budget);
                   }}
                 />
               </td>
@@ -98,49 +96,56 @@ const ActivityTable = (props: Props) => {
   return (
     <>
       {props.createActive ? (
-        <ActivityCreate
+        <BudgetCreate
           token={props.token}
-          fetchActivities={props.fetchActivities}
+          fetchBudgets={props.fetchBudgets}
           toggleCreateOn={props.toggleCreateOn}
-          users={props.users}
         />
       ) : null}
-      <ActivityContainer>
+      <BudgetContainer>
         <Title>
-          <h1>Activities</h1>
+          <h1>Budgets</h1>
           <FiIcons.FiPlusSquare onClick={() => props.toggleCreateOn()} />
         </Title>
         <TableContainer>
           <Table>
             <thead>
               <tr>
-                <th scope='col'>Activities</th>
-                <th scope='col'>DueDate</th>
-                <th scope='col'>Campaign Manager</th>
+                <th scope='col'>Year:</th>
+                <th scope='col'>Month:</th>
+                <th scope='col'>Start Date:</th>
+                <th scope='col'>End Date:</th>
+                <th scope='col'>Spend As Of:</th>
+                <th scope='col'>Budget Amount:</th>
+                <th scope='col'>Spend Amount:</th>
+                <th scope='col'>Roll Over:</th>
+                <th scope='col'>Daily Pacing:</th>
+                <th scope='col'>Actual Pacing:</th>
+                <th scope='col'>BU%:</th>
                 <th scope='col'></th>
                 <th scope='col'></th>
               </tr>
             </thead>
-            <tbody>{ActivityMapper()}</tbody>
+            <tbody>{BudgetMapper()}</tbody>
           </Table>
         </TableContainer>
-      </ActivityContainer>
-      {props.updateActive && editingActivity ? (
-        <ActivityEdit
+      </BudgetContainer>
+      {props.updateActive && editingBudget ? (
+        <BudgetEdit
           token={props.token}
           toggleEditOn={props.toggleEditOn}
-          activityToUpdate={editingActivity}
-          users={props.users}
-          fetchActivities={props.fetchActivities}
+          budgetToUpdate={editingBudget}
+          fetchBudgets={props.fetchBudgets}
+          editBudget={props.editBudget}
         />
       ) : null}
     </>
   );
 };
 
-export default ActivityTable;
+export default BudgetTable;
 
-export const ActivityContainer = styled.div`
+export const BudgetContainer = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -160,39 +165,26 @@ export const TableContainer = styled.div`
 
 export const Table = styled.table`
   table-layout: fixed;
-  width: 100%;
-  height: 200px;
+  /* width: 100%; */
+  height: auto;
   padding: 5px 5px 10px 5px;
   border-collapse: separate;
   border-spacing: 0;
+  overflow: hidden;
+  overflow-x: scroll;
 
   thead {
     background: #59328c;
-    width: 100%;
+    width: auto;
   }
 
   th {
     color: #ffffff;
-    padding: 10px;
-  }
-
-  thead th:nth-child(1) {
-    text-align: left;
-    width: 40%;
-    overflow: wrap;
-  }
-
-  thead th:nth-child(2) {
-    width: 10%;
-    text-align: center;
-  }
-
-  thead th:nth-child(3) {
-    width: 30%;
-    text-align: center;
+    padding: 5px 20px;
   }
 
   tbody tr {
+    height: 15px;
     &:hover {
       background: #c2abe1;
       color: #ffffff;
@@ -207,13 +199,9 @@ export const Table = styled.table`
     }
   }
 
-  tbody td:nth-child(1) {
-    text-align: left;
-  }
-
   tbody td {
     text-align: center;
-    padding: 5px;
+    padding: 5px 35px;
   }
 
   button {

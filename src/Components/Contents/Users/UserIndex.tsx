@@ -55,6 +55,10 @@ const UserIndex = (props: Props) => {
     setCreateActive(!createActive);
   };
 
+  const toggleEditOn = () => {
+    setUpdateActive(!updateActive);
+  };
+
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -70,6 +74,7 @@ const UserIndex = (props: Props) => {
             updateActive={updateActive}
             createActive={createActive}
             toggleCreateOn={toggleCreateOn}
+            toggleEditOn={toggleEditOn}
             editUser={editUser}
           />
         </ChildOne>

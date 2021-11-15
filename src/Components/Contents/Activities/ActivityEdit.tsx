@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import APIURL from '../../../Utilities/Environments';
-import { StyledModal, ModalClose } from '../../Styles/Modal';
+import { StyledModal, ModalClose, Title } from '../../Styles/Modal';
 import * as AiIcons from 'react-icons/ai';
 
 type User = {
@@ -62,14 +62,16 @@ const ActivityEdit = (props: Props) => {
 
   return (
     <StyledModal>
-      <ModalClose
-        onClick={() => {
-          props.toggleEditOn();
-        }}>
-        <AiIcons.AiOutlineClose />
-      </ModalClose>
-      <form onSubmit={ActivityUpdate} id='ActivityUpdate'>
+      <Title>
         <h1>Update Activity</h1>
+        <ModalClose
+          onClick={() => {
+            props.toggleEditOn();
+          }}>
+          <AiIcons.AiOutlineClose />
+        </ModalClose>
+      </Title>
+      <form onSubmit={ActivityUpdate} id='ActivityUpdate'>
         <div>
           <label htmlFor='activityNotes'>Activity:</label>
           <input
@@ -82,6 +84,7 @@ const ActivityEdit = (props: Props) => {
           <label htmlFor='dueDate'>Due Date:</label>
           <input
             name='dueDate'
+            type='date'
             value={editDueDate}
             onChange={(e) => setEditDueDate(e.target.value)}
           />
@@ -97,10 +100,10 @@ const ActivityEdit = (props: Props) => {
             ))}
           </select>
         </div>
-        <button type='submit' form='ActivityUpdate'>
-          Update
-        </button>
       </form>
+      <button type='submit' form='ActivityUpdate'>
+        Update
+      </button>
     </StyledModal>
   );
 };

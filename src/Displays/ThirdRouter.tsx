@@ -79,6 +79,10 @@ export const Container = styled.div`
 
   li:nth-child(1) {
     margin: 0 0 0 0;
+
+    &:hover {
+      border-top-left-radius: 10px;
+    }
   }
 
   li:not(:first-child) {

@@ -33,29 +33,27 @@ const CampaignDisplay = (props: Props) => {
   const CampaignMapper = () => {
     return props.campaign.map((campaign: Campaign, index) => {
       return (
-        <>
-          <Container key={index}>
-            <div>
-              <label>Campaign Method:</label>
-              <p>{campaign.campaignMethod}</p>
-            </div>
-            <div>
-              <label>KPI Rank:</label>
-              <p>{campaign.kpiRank}</p>
-            </div>
-            <div>
-              <label>KPI Notes:</label>
-              <p>{campaign.kpiNotes}</p>
-            </div>
-            <div>
-              <label>Onset Notes:</label>
-              <p>{campaign.onsetNotes}</p>
-            </div>
-            <div>
-              <label>Campaign Pacing Type:</label>
-              <p>{campaign.pacing}</p>
-            </div>
-          </Container>
+        <div key={index}>
+          <div>
+            <label>Campaign Method:</label>
+            <p>{campaign.campaignMethod}</p>
+          </div>
+          <div>
+            <label>KPI Rank:</label>
+            <p>{campaign.kpiRank}</p>
+          </div>
+          <div>
+            <label>KPI Notes:</label>
+            <p>{campaign.kpiNotes}</p>
+          </div>
+          <div>
+            <label>Onset Notes:</label>
+            <p>{campaign.onsetNotes}</p>
+          </div>
+          <div>
+            <label>Campaign Pacing Type:</label>
+            <p>{campaign.pacing}</p>
+          </div>
           <EditButton
             onClick={() => {
               setEditingCampaign(campaign);
@@ -64,7 +62,7 @@ const CampaignDisplay = (props: Props) => {
             }}>
             Edit Campaign
           </EditButton>
-        </>
+        </div>
       );
     });
   };
@@ -83,7 +81,9 @@ const CampaignDisplay = (props: Props) => {
           <h1>Campaign</h1>
           <FiIcons.FiPlusSquare onClick={() => props.toggleCreateOn()} />
         </Title>
-        <>{CampaignMapper()}</>
+        <Container>
+          <>{CampaignMapper()}</>
+        </Container>
       </CampaignContainer>
       {props.updateActive && editingCampaign ? (
         <CampaignEdit
@@ -136,8 +136,9 @@ export const Container = styled.div`
 `;
 
 const EditButton = styled.div`
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 35px;
   width: 200px;
   color: #ffffff;

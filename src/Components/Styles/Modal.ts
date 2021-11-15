@@ -1,35 +1,32 @@
 import styled from 'styled-components';
 
 export const StyledModal = styled.div`
-  padding: 50px;
+  padding: 25px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   background-color: white;
   position: absolute;
-  margin: 0 auto;
   z-index: 75;
-  top: 52%;
+  top: 50%;
   left: 50%;
+  width: auto;
+  height: auto;
   transform: translate(-50%, -50%);
   box-shadow: 1px 1px 15px black;
   border: 3px solid #59328c;
   border-radius: 10px;
-
-  h1 {
-    text-align: center;
-    margin: 25px 0;
-    color: #59328c;
-  }
+  overflow-y: scroll;
 
   form {
     color: #283747;
     display: flex;
-    flex-direction: column;
-    width: 300px;
-    margin: 10px auto;
+    flex-wrap: wrap;
   }
 
+  div {
+    margin: 10px;
+  }
   label {
     margin-bottom: 0.5em;
     color: #283747;
@@ -59,6 +56,7 @@ export const StyledModal = styled.div`
   }
 
   button {
+    align-self: flex-end;
     height: 35px;
     width: 150px;
     color: white;
@@ -69,7 +67,6 @@ export const StyledModal = styled.div`
     margin: 15px 0 0 0;
     padding: 5px;
     box-shadow: 1px 3px 7px gray;
-    align-self: center;
 
     &:hover {
       background: transparent;
@@ -79,11 +76,24 @@ export const StyledModal = styled.div`
   }
 `;
 
+export const Title = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  h1 {
+    color: #59328c;
+    font-size: 25px;
+  }
+`;
+
 export const ModalClose = styled.div`
-  align-self: flex-end;
-  font-size: 25px;
+  font-size: 15px;
   color: #59328c;
   border: 2px solid #59328c;
+  text-align: center;
 
   &:hover {
     color: #c2abe1;

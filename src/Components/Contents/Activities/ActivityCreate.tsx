@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import APIURL from '../../../Utilities/Environments';
-import { StyledModal, ModalClose } from '../../Styles/Modal';
+import { StyledModal, ModalClose, Title } from '../../Styles/Modal';
 import * as AiIcons from 'react-icons/ai';
 import { useParams } from 'react-router-dom';
 
@@ -56,14 +56,16 @@ const ActivityCreate = (props: Props) => {
 
   return (
     <StyledModal>
-      <ModalClose
-        onClick={() => {
-          props.toggleCreateOn();
-        }}>
-        <AiIcons.AiOutlineClose />
-      </ModalClose>
-      <form onSubmit={fetchActivityData} id='createActivity'>
+      <Title>
         <h1>New Activity</h1>
+        <ModalClose
+          onClick={() => {
+            props.toggleCreateOn();
+          }}>
+          <AiIcons.AiOutlineClose />
+        </ModalClose>
+      </Title>
+      <form onSubmit={fetchActivityData} id='createActivity'>
         <div>
           <label htmlFor='activityNotes'>Activity:</label>
           <input
@@ -76,6 +78,7 @@ const ActivityCreate = (props: Props) => {
           <label htmlFor='dueDate'>Due Date:</label>
           <input
             name='dueDate'
+            type='date'
             value={dueDate}
             onChange={(e) => setDueDate(e.target.value)}
           />

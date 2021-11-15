@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import APIURL from '../../../Utilities/Environments';
-import { StyledModal, ModalClose } from '../../Styles/Modal';
+import { StyledModal, ModalClose, Title } from '../../Styles/Modal';
 import * as AiIcons from 'react-icons/ai';
 
 type Agency = {
@@ -17,6 +17,7 @@ type Props = {
 const IoCreate = (props: Props) => {
   const [agencies, setAgencies] = useState([]);
   const [agencyIO, setAgencyIO] = useState('');
+  const [ioBudget, setIoBudget] = useState(0);
   const [ioSpend, setIoSpend] = useState(0);
   const [agencyId, setAgencyId] = useState('');
 
@@ -37,6 +38,7 @@ const IoCreate = (props: Props) => {
       .then((res) => res.json())
       .then(() => {
         setAgencyIO('');
+        setIoBudget(0);
         setIoSpend(0);
       })
       .then(() => {
@@ -64,14 +66,16 @@ const IoCreate = (props: Props) => {
 
   return (
     <StyledModal>
-      <ModalClose
-        onClick={() => {
-          props.toggleCreateOn();
-        }}>
-        <AiIcons.AiOutlineClose />
-      </ModalClose>
-      <form onSubmit={fetchIoData} id='ioCreate'>
+      <Title>
         <h1>Agency Insertion Order</h1>
+        <ModalClose
+          onClick={() => {
+            props.toggleCreateOn();
+          }}>
+          <AiIcons.AiOutlineClose />
+        </ModalClose>
+      </Title>
+      <form onSubmit={fetchIoData} id='ioCreate'>
         <div>
           <label htmlFor='agencyIO'>IO #:</label>
           <input
@@ -81,9 +85,19 @@ const IoCreate = (props: Props) => {
           />
         </div>
         <div>
+          <label htmlFor='ioBudget'>IO Budget:</label>
+          <input
+            name='ioBudget'
+            type='number'
+            value={ioBudget}
+            onChange={(e) => setIoBudget(Number(e.target.value))}
+          />
+        </div>
+        <div>
           <label htmlFor='ioSpend'>Io Spend:</label>
           <input
             name='ioSpend'
+            type='number'
             value={ioSpend}
             onChange={(e) => setIoSpend(Number(e.target.value))}
           />

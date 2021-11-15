@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import APIURL from '../../../Utilities/Environments';
-import { StyledModal, ModalClose } from '../../Styles/Modal';
+import { StyledModal, ModalClose, Title } from '../../Styles/Modal';
 import * as AiIcons from 'react-icons/ai';
 import { useParams } from 'react-router-dom';
 
@@ -44,14 +44,16 @@ const EngagementCreate = (props: Props) => {
 
   return (
     <StyledModal>
-      <ModalClose
-        onClick={() => {
-          props.toggleCreateOn();
-        }}>
-        <AiIcons.AiOutlineClose />
-      </ModalClose>
-      <form onSubmit={fetchEngagementData}>
+      <Title>
         <h1>New Engagement</h1>
+        <ModalClose
+          onClick={() => {
+            props.toggleCreateOn();
+          }}>
+          <AiIcons.AiOutlineClose />
+        </ModalClose>
+      </Title>
+      <form onSubmit={fetchEngagementData} id='engageCreate'>
         <div>
           <label htmlFor='engagementNote'>Engagement:</label>
           <input
@@ -64,12 +66,15 @@ const EngagementCreate = (props: Props) => {
           <label htmlFor='date'>Date:</label>
           <input
             name='date'
+            type='date'
             value={date}
             onChange={(e) => setDate(e.target.value)}
           />
         </div>
-        <button type='submit'>Add Engagement</button>
       </form>
+      <button type='submit' form='engageCreate'>
+        Add Engagement
+      </button>
     </StyledModal>
   );
 };

@@ -34,33 +34,31 @@ const ProviderDisplay = (props: Props) => {
   const ProviderMapper = () => {
     return props.provider.map((provider: Provider, index) => {
       return (
-        <>
-          <Container key={index}>
-            <div>
-              <label>Provider Name:</label>
-              <p>{provider.providerName}</p>
-            </div>
-            <div>
-              <label>Provider Code:</label>
-              <p>{provider.providerCode}</p>
-            </div>
-            <div>
-              <label>Provider ID:</label>
-              <p>{provider.providerId}</p>
-            </div>
-            <div>
-              <label>Provider Type:</label>
-              <p>{provider.providerType}</p>
-            </div>
-            <div>
-              <label>Job Source:</label>
-              <p>{provider.jobSource}</p>
-            </div>
-            <div>
-              <label>Vendor Source:</label>
-              <p>{provider.vendorSource}</p>
-            </div>
-          </Container>
+        <div key={index}>
+          <div>
+            <label>Provider Name:</label>
+            <p>{provider.providerName}</p>
+          </div>
+          <div>
+            <label>Provider Code:</label>
+            <p>{provider.providerCode}</p>
+          </div>
+          <div>
+            <label>Provider ID:</label>
+            <p>{provider.providerId}</p>
+          </div>
+          <div>
+            <label>Provider Type:</label>
+            <p>{provider.providerType}</p>
+          </div>
+          <div>
+            <label>Job Source:</label>
+            <p>{provider.jobSource}</p>
+          </div>
+          <div>
+            <label>Vendor Source:</label>
+            <p>{provider.vendorSource}</p>
+          </div>
           <EditButton
             onClick={() => {
               setEditingProvider(provider);
@@ -69,7 +67,7 @@ const ProviderDisplay = (props: Props) => {
             }}>
             Edit Provider
           </EditButton>
-        </>
+        </div>
       );
     });
   };
@@ -88,7 +86,9 @@ const ProviderDisplay = (props: Props) => {
           <h1>Provider</h1>
           <FiIcons.FiPlusSquare onClick={() => props.toggleCreateOn()} />
         </Title>
-        <>{ProviderMapper()}</>
+        <Container>
+          <>{ProviderMapper()}</>
+        </Container>
       </ProviderContainer>
       {props.updateActive && editingProvider ? (
         <ProviderEdit

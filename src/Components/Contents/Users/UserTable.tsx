@@ -21,7 +21,8 @@ type Props = {
   fetchUsers: Function;
   editUser: Function;
   updateActive: boolean;
-  toggleCreateOn: Function;
+  toggleCreateOn: () => void;
+  toggleEditOn: () => void;
   createActive: boolean;
 };
 
@@ -51,7 +52,7 @@ const UserTable = (props: Props) => {
               onClick={() => {
                 setEditingUser(user);
                 props.editUser(user);
-                toggleEditOn();
+                props.toggleEditOn();
               }}
             />
           </td>
@@ -67,9 +68,6 @@ const UserTable = (props: Props) => {
     });
   };
 
-  const toggleEditOn = () => {
-    setUpdateActive(!updateActive);
-  };
   return (
     <>
       {props.createActive ? (
@@ -96,15 +94,16 @@ const UserTable = (props: Props) => {
           </thead>
           <tbody>{UsersMapper()}</tbody>
         </Table>
-        {props.updateActive && editingUser ? (
-          <UserEdit
-            userToUpdate={editingUser}
-            token={props.token}
-            editUser={props.editUser}
-            fetchUsers={props.fetchUsers}
-          />
-        ) : null}
       </UserContainer>
+      {props.updateActive && editingUser ? (
+        <UserEdit
+          userToUpdate={editingUser}
+          token={props.token}
+          editUser={props.editUser}
+          fetchUsers={props.fetchUsers}
+          toggleEditOn={props.toggleEditOn}
+        />
+      ) : null}
     </>
   );
 };

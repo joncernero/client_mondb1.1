@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import APIURL from '../../../Utilities/Environments';
-import { StyledModal, ModalClose } from '../../Styles/Modal';
+import { StyledModal, ModalClose, Title } from '../../Styles/Modal';
 import * as AiIcons from 'react-icons/ai';
 
 type Engagement = {
@@ -45,14 +45,16 @@ const EngagementEdit = (props: Props) => {
 
   return (
     <StyledModal>
-      <ModalClose
-        onClick={() => {
-          props.toggleEditOn();
-        }}>
-        <AiIcons.AiOutlineClose />
-      </ModalClose>
-      <form onSubmit={EngagementUpdate}>
+      <Title>
         <h1>Update Engagement</h1>
+        <ModalClose
+          onClick={() => {
+            props.toggleEditOn();
+          }}>
+          <AiIcons.AiOutlineClose />
+        </ModalClose>
+      </Title>
+      <form onSubmit={EngagementUpdate} id='engageEdit'>
         <div>
           <label htmlFor='engagementNote'>Engagement:</label>
           <input
@@ -65,12 +67,15 @@ const EngagementEdit = (props: Props) => {
           <label htmlFor='date'>Date:</label>
           <input
             name='date'
+            type='date'
             value={editDate}
             onChange={(e) => setEditDate(e.target.value)}
           />
         </div>
-        <button type='submit'>Update</button>
       </form>
+      <button type='submit' form='engageEdit'>
+        Update
+      </button>
     </StyledModal>
   );
 };

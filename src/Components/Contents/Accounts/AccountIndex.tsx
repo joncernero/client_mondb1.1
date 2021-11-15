@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import APIURL from '../../../Utilities/Environments';
 import AccountTable from './AccountTable';
+import AccountCreate from './AccountCreate';
 import { Spinner } from '../../Styles/Spinner';
+import styled from 'styled-components';
 
 type Props = {
   token: string | null;
@@ -60,8 +62,25 @@ const AccountIndex = (props: Props) => {
 
   return (
     <>
+      {createActive ? (
+        <AccountCreate
+          token={props.token}
+          users={users}
+          fetchAccounts={fetchAccounts}
+          toggleCreateOn={toggleCreateOn}
+        />
+      ) : null}
+      <Title>
+        {/* <h1>{`Welcome`}</h1> */}
+        <button
+          onClick={() => {
+            toggleCreateOn();
+          }}>
+          Create Account
+        </button>
+      </Title>
       {showLoading()}
-      <>
+      <Container>
         <AccountTable
           token={props.token}
           fetchAccounts={fetchAccounts}
@@ -70,9 +89,38 @@ const AccountIndex = (props: Props) => {
           accounts={accounts}
           users={users}
         />
-      </>
+      </Container>
     </>
   );
 };
 
 export default AccountIndex;
+
+export const Container = styled.div`
+  height: 80vh;
+  padding: 10px;
+  overflow: scroll;
+`;
+
+export const Title = styled.div`
+  display: flex;
+  color: #59328c;
+  margin: 0 15px 15px 15px;
+
+  button {
+    align-self: flex-end;
+    background: #ffffff;
+    color: #59328c;
+    padding: 5px 15px;
+    font-weight: bold;
+    border: 2px solid #59328c;
+    border-radius: 5px;
+    height: 35px;
+
+    &:hover {
+      background: #59328c;
+      color: #ffffff;
+      font-weight: bold;
+    }
+  }
+`;

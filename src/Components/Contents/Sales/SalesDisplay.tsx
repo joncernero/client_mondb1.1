@@ -33,37 +33,35 @@ const SalesDisplay = (props: Props) => {
   const SalesMapper = () => {
     return props.sales.map((sales: Sales, index) => {
       return (
-        <>
-          <Container key={index}>
-            <div>
-              <label>PPC Sales Rep:</label>
-              <p>{sales.ppcSales}</p>
-            </div>
-            <div>
-              <label>Segment:</label>
-              <p>{sales.segment}</p>
-            </div>
-            <div>
-              <label>Industry:</label>
-              <p>{sales.industry}</p>
-            </div>
-            <div>
-              <label>Region:</label>
-              <p>{sales.region}</p>
-            </div>
-            <div>
-              <label>Customer ATS:</label>
-              <p>{sales.ats}</p>
-            </div>
-            <div>
-              <label>Sales Channel:</label>
-              <p>{sales.salesChannel}</p>
-            </div>
-            <div>
-              <label>Primary Sales Rep:</label>
-              <p>{sales.primarySales}</p>
-            </div>
-          </Container>
+        <div key={index}>
+          <div>
+            <label>PPC Sales Rep:</label>
+            <p>{sales.ppcSales}</p>
+          </div>
+          <div>
+            <label>Segment:</label>
+            <p>{sales.segment}</p>
+          </div>
+          <div>
+            <label>Industry:</label>
+            <p>{sales.industry}</p>
+          </div>
+          <div>
+            <label>Region:</label>
+            <p>{sales.region}</p>
+          </div>
+          <div>
+            <label>Customer ATS:</label>
+            <p>{sales.ats}</p>
+          </div>
+          <div>
+            <label>Sales Channel:</label>
+            <p>{sales.salesChannel}</p>
+          </div>
+          <div>
+            <label>Primary Sales Rep:</label>
+            <p>{sales.primarySales}</p>
+          </div>
           <EditButton
             onClick={() => {
               setEditingSales(sales);
@@ -72,7 +70,7 @@ const SalesDisplay = (props: Props) => {
             }}>
             Edit Campaign
           </EditButton>
-        </>
+        </div>
       );
     });
   };
@@ -91,7 +89,9 @@ const SalesDisplay = (props: Props) => {
           <h1>Sales</h1>
           <FiIcons.FiPlusSquare onClick={() => props.toggleCreateOn()} />
         </Title>
-        <>{SalesMapper()}</>
+        <Container>
+          <>{SalesMapper()}</>
+        </Container>
       </SalesContainer>
       {props.updateActive && editingSales ? (
         <SalesEdit

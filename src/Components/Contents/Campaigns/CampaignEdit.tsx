@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import APIURL from '../../../Utilities/Environments';
-import { StyledModal, ModalClose } from '../../Styles/Modal';
+import { StyledModal, ModalClose, Title } from '../../Styles/Modal';
 import * as AiIcons from 'react-icons/ai';
 
 type Campaign = {
@@ -86,14 +86,16 @@ const CampaignEdit = (props: Props) => {
 
   return (
     <StyledModal>
-      <ModalClose
-        onClick={() => {
-          props.toggleEditOn();
-        }}>
-        <AiIcons.AiOutlineClose />
-      </ModalClose>
-      <form onSubmit={CampaignUpdate}>
+      <Title>
         <h1>Add Campaign Info</h1>
+        <ModalClose
+          onClick={() => {
+            props.toggleEditOn();
+          }}>
+          <AiIcons.AiOutlineClose />
+        </ModalClose>
+      </Title>
+      <form onSubmit={CampaignUpdate} id='campUpdate'>
         <div>
           <div>
             <label htmlFor='campaignMethod'>Campaign Method:</label>
@@ -145,8 +147,10 @@ const CampaignEdit = (props: Props) => {
             </select>
           </div>
         </div>
-        <button type='submit'>Add Campaign Info</button>
       </form>
+      <button type='submit' form='campUpdate'>
+        Add Campaign Info
+      </button>
     </StyledModal>
   );
 };

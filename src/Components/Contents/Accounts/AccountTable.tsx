@@ -1,7 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import AccountCreate from './AccountCreate';
 
 type User = {
   id: string;
@@ -55,113 +54,62 @@ const AccountTable = (props: Props) => {
   };
 
   return (
-    <Container>
-      <ChildOne>
-        {props.createActive ? (
-          <AccountCreate
-            token={props.token}
-            users={props.users}
-            fetchAccounts={props.fetchAccounts}
-            toggleCreateOn={props.toggleCreateOn}
-          />
-        ) : null}
-        <div>
-          {/* <h1>{`Welcome`}</h1> */}
-          <button
-            onClick={() => {
-              props.toggleCreateOn();
-            }}>
-            Create Account
-          </button>
-        </div>
-        <Table>
-          <thead>
-            <tr>
-              <th scope='col'>AccountName</th>
-              <th scope='col'>AccountID</th>
-              <th scope='col'>Customer #</th>
-              <th scope='col'>AccountType</th>
-              <th scope='col'>Assignment Date</th>
-              <th scope='col'>primary XCode</th>
-            </tr>
-          </thead>
-          <tbody>{AccountsMapper()}</tbody>
-        </Table>
-      </ChildOne>
-    </Container>
+    <>
+      <AccountContainer>
+        <TableContainer>
+          <Table>
+            <thead>
+              <tr>
+                <th scope='col'>AccountName</th>
+                <th scope='col'>AccountID</th>
+                <th scope='col'>Customer #</th>
+                <th scope='col'>AccountType</th>
+                <th scope='col'>Assignment Date</th>
+                <th scope='col'>primary XCode</th>
+              </tr>
+            </thead>
+            <tbody>{AccountsMapper()}</tbody>
+          </Table>
+        </TableContainer>
+      </AccountContainer>
+    </>
   );
 };
 
 export default AccountTable;
 
-export const Container = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  justify-items: center;
-  row-gap: 50px;
-  grid-template-areas:
-    'one one'
-    'one one'
-    'one one'
-    'two two';
-  height: 90vh;
-  width: auto;
+export const AccountContainer = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
-export const ChildOne = styled.div`
-  grid-area: one;
-  height: auto;
-  width: 70vw;
-  padding: 25px;
-
-  div {
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  button {
-    height: 40px;
-    width: 150px;
-    color: #59328c;
-    font-size: 15px;
-    font-weight: bold;
-    background: transparent;
-    border-radius: 5px;
-    margin: 25px;
-    padding: 10px;
-
-    &:hover {
-      background: #c2abe1;
-      color: #ffffff;
-      border: 2px solid #c2abe1;
-    }
-  }
+export const Title = styled.div`
+  display: flex;
+  color: #59328c;
+  justify-content: space-between;
+  margin: 0 15px 15px 15px;
 `;
 
-export const ChildTwo = styled.div`
-  grid-area: two;
-  width: 60vw;
-  align-self: center;
-`;
+export const TableContainer = styled.div``;
 
 export const Table = styled.table`
   table-layout: fixed;
   width: 100%;
-  padding: 25px 25px;
-  border: 2px solid #59328c;
-  border-radius: 10px;
-  margin-bottom: 10px;
+  height: 500px;
+  padding: 5px 5px 10px 5px;
   border-collapse: separate;
   border-spacing: 0;
 
   thead {
     background: #59328c;
     width: 100%;
+    height: 15px;
   }
 
   thead th:nth-child(1) {
     text-align: left;
     width: 10%;
+    overflow: wrap;
   }
 
   thead th:nth-child(2) {
@@ -188,7 +136,6 @@ export const Table = styled.table`
     &:hover {
       background: #c2abe1;
       color: #ffffff;
-      font-weight: bold;
     }
   }
 
@@ -203,9 +150,6 @@ export const Table = styled.table`
   th {
     color: #ffffff;
     padding: 15px;
-  }
-
-  tbody td {
   }
 
   td {

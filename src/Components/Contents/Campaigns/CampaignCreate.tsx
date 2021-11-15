@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import APIURL from '../../../Utilities/Environments';
-import { StyledModal, ModalClose } from '../../Styles/Modal';
+import { StyledModal, ModalClose, Title } from '../../Styles/Modal';
 import * as AiIcons from 'react-icons/ai';
 import { useParams } from 'react-router-dom';
 
@@ -78,15 +78,18 @@ const CampaignCreate = (props: Props) => {
   ];
 
   return (
+    //unfixed
     <StyledModal>
-      <ModalClose
-        onClick={() => {
-          props.toggleCreateOn();
-        }}>
-        <AiIcons.AiOutlineClose />
-      </ModalClose>
-      <form onSubmit={fetchCampaignData}>
+      <Title>
         <h1>Add Campaign Info</h1>
+        <ModalClose
+          onClick={() => {
+            props.toggleCreateOn();
+          }}>
+          <AiIcons.AiOutlineClose />
+        </ModalClose>
+      </Title>
+      <form onSubmit={fetchCampaignData} id='campCreate'>
         <div>
           <div>
             <label htmlFor='campaignMethod'>Campaign Method:</label>
@@ -138,8 +141,10 @@ const CampaignCreate = (props: Props) => {
             </select>
           </div>
         </div>
-        <button type='submit'>Add Campaign Info</button>
       </form>
+      <button type='submit' form='campCreate'>
+        Add Campaign Info
+      </button>
     </StyledModal>
   );
 };

@@ -37,49 +37,47 @@ const ImplementDisplay = (props: Props) => {
   const ImplementMapper = () => {
     return props.implementation.map((implement: Implementation, index) => {
       return (
-        <>
-          <Container key={index}>
-            <div>
-              <label>Mobile Optimized:</label>
-              <p>{implement.mobileOptimized}</p>
-            </div>
-            <div>
-              <label>Jobs URL:</label>
-              <p>{implement.jobsURL}</p>
-            </div>
-            <div>
-              <label>Pixel Status:</label>
-              <p>{implement.pixelStatus}</p>
-            </div>
-            <div>
-              <label>Source Tag:</label>
-              <p>{implement.sourceTag}</p>
-            </div>
-            <div>
-              <label>Bid Optimizer:</label>
-              <p>{implement.bidOptimizer}</p>
-            </div>
-            <div>
-              <label>AwM:</label>
-              <p>{implement.awm}</p>
-            </div>
-            <div>
-              <label>Military:</label>
-              <p>{implement.military}</p>
-            </div>
-            <div>
-              <label>EJB:</label>
-              <p>{implement.ejb}</p>
-            </div>
-            <div>
-              <label>GUID:</label>
-              <p>{implement.guid}</p>
-            </div>
-            <div>
-              <label>Eligible For Free:</label>
-              <p>{implement.eligibleForFree}</p>
-            </div>
-          </Container>
+        <div key={index}>
+          <div>
+            <label>Mobile Optimized:</label>
+            <p>{implement.mobileOptimized}</p>
+          </div>
+          <div>
+            <label>Jobs URL:</label>
+            <p>{implement.jobsURL}</p>
+          </div>
+          <div>
+            <label>Pixel Status:</label>
+            <p>{implement.pixelStatus}</p>
+          </div>
+          <div>
+            <label>Source Tag:</label>
+            <p>{implement.sourceTag}</p>
+          </div>
+          <div>
+            <label>Bid Optimizer:</label>
+            <p>{implement.bidOptimizer}</p>
+          </div>
+          <div>
+            <label>AwM:</label>
+            <p>{implement.awm}</p>
+          </div>
+          <div>
+            <label>Military:</label>
+            <p>{implement.military}</p>
+          </div>
+          <div>
+            <label>EJB:</label>
+            <p>{implement.ejb}</p>
+          </div>
+          <div>
+            <label>GUID:</label>
+            <p>{implement.guid}</p>
+          </div>
+          <div>
+            <label>Eligible For Free:</label>
+            <p>{implement.eligibleForFree}</p>
+          </div>
           <EditButton
             onClick={() => {
               setEditingImplementation(implement);
@@ -88,7 +86,7 @@ const ImplementDisplay = (props: Props) => {
             }}>
             Edit Implementation
           </EditButton>
-        </>
+        </div>
       );
     });
   };
@@ -107,7 +105,9 @@ const ImplementDisplay = (props: Props) => {
           <h1>Implementation</h1>
           <FiIcons.FiPlusSquare onClick={() => props.toggleCreateOn()} />
         </Title>
-        <>{ImplementMapper()}</>
+        <Container>
+          <>{ImplementMapper()}</>
+        </Container>
       </ImplementContainer>
       {props.updateActive && editingImplementation ? (
         <ImplementEdit
