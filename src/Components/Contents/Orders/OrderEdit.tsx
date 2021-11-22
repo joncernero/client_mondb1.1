@@ -74,6 +74,10 @@ const OrderEdit = (props: Props) => {
   const [editContractType, setEditContractType] = useState(
     props.orderToUpdate.contractType
   );
+  const [editAccountId, setEditAccountId] = useState(
+    props.orderToUpdate.accountId
+  );
+  const [editIoId, setEditIoId] = useState(props.orderToUpdate.ioId);
 
   const OrderUpdate = (e: React.SyntheticEvent): void => {
     e.preventDefault();
@@ -89,6 +93,8 @@ const OrderEdit = (props: Props) => {
         spendAsOfDate: editSpendAsOfDate,
         budgetSpent: editBudgetSpent,
         contractType: editContractType,
+        accountId: editAccountId,
+        ioId: editIoId,
       }),
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -175,7 +181,7 @@ const OrderEdit = (props: Props) => {
           <label htmlFor='editSpendAsOfDate'>Spend As Of Date:</label>
           <input
             name='editSpendAsOfDate'
-            type='date '
+            type='date'
             value={editSpendAsOfDate}
             onChange={(e) => setEditSpendAsOfDate(e.target.value)}
           />

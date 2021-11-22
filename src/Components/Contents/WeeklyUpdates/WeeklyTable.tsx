@@ -1,54 +1,57 @@
 import React, { useState } from 'react';
 import APIURL from '../../../Utilities/Environments';
-import ActivityCreate from './ActivityCreate';
-import ActivityEdit from './ActivityEdit';
+import WeeklyCreate from './WeeklyCreate';
+import WeeklyEdit from './WeeklyEdit';
 import styled from 'styled-components';
 import * as FiIcons from 'react-icons/fi';
 
-type User = {
+type Account = {
   id: string;
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  campaignManager: string;
-  role: string;
+  accountName: string;
+  accountID: string;
+  customerNumber: number;
+  accountType: string;
+  assignmentDate: string;
+  primaryXCode: string;
+  userId: string;
+  agencyId: string;
 };
 
-type Activity = {
+type WeeklyUpdate = {
   id: string;
-  activityNotes: string;
-  dueDate: string;
+  weeklyUpdate: string;
+  jobCount: number;
+  activeCampaigns: number;
+  date: string;
   accountId: string;
-  userId: string;
 };
 
 type Props = {
   token: string;
-  users: User[];
-  activities: Activity[];
-  fetchActivities: Function;
+  accounts: Account[];
+  weeklyUpdates: WeeklyUpdate[];
+  fetchWeeklies: Function;
   createActive: boolean;
   updateActive: boolean;
   toggleCreateOn: () => void;
   toggleEditOn: () => void;
-  editActivity: Function;
+  editWeeklyUpdate: Function;
 };
 
-const ActivityTable = (props: Props) => {
-  const [editingActivity, setEditingActivity] = useState<
-    Activity | undefined
+const WeeklyUpdateTable = (props: Props) => {
+  const [editingWeeklyUpdate, setEditingWeeklyUpdate] = useState<
+    WeeklyUpdate | undefined
   >();
 
-  const DeleteActivity = (activity: Activity) => {
-    fetch(`${APIURL}/activity/delete/${activity.id}`, {
+  const DeleteWeekly = (weeklyUpdate: WeeklyUpdate) => {
+    fetch(`${APIURL}/weeklyupdate/delete/${weeklyUpdate.id}`, {
       method: 'Delete',
       headers: new Headers({
         'Content-Type': 'application/json',
         Authorization: `${localStorage.getItem('token')}`,
       }),
     })
-      .then(() => props.fetchActivities())
+      .then(() => props.fetchWeeklies())
       .catch((error) => console.log(error));
   };
 
@@ -57,26 +60,20 @@ const ActivityTable = (props: Props) => {
     return new Intl.DateTimeFormat('en-US').format(dateObj);
   };
 
-  const ActivityMapper = () => {
-    console.log(props.activities);
-    return props.activities.length > 0
-      ? props.activities.map((activity: Activity, index) => {
+  const WeeklyMapper = () => {
+    return props.weeklyUpdates.length > 0
+      ? props.weeklyUpdates.map((weeklyUpdate: WeeklyUpdate, index) => {
           return (
             <tr key={index}>
-              <td>{activity.activityNotes}</td>
-              <td>{FormatDate(activity.dueDate)}</td>
-              <td>
-                {props.users.map((user: User) => {
-                  return user.id === activity.userId
-                    ? user.campaignManager
-                    : null;
-                })}
-              </td>
+              <td>{weeklyUpdate.weeklyUpdate}</td>
+              <td>{weeklyUpdate.jobCount}</td>
+              <td>{weeklyUpdate.activeCampaigns}</td>
+              <td>{FormatDate(weeklyUpdate.date)}</td>
               <td>
                 <FiIcons.FiEdit2
                   onClick={() => {
-                    setEditingActivity(activity);
-                    props.editActivity();
+                    setEditingWeeklyUpdate(weeklyUpdate);
+                    props.editWeeklyUpdate();
                     props.toggleEditOn();
                   }}
                 />
@@ -84,7 +81,7 @@ const ActivityTable = (props: Props) => {
               <td>
                 <FiIcons.FiTrash
                   onClick={() => {
-                    DeleteActivity(activity);
+                    DeleteWeekly(weeklyUpdate);
                   }}
                 />
               </td>
@@ -97,49 +94,50 @@ const ActivityTable = (props: Props) => {
   return (
     <>
       {props.createActive ? (
-        <ActivityCreate
+        <WeeklyCreate
           token={props.token}
-          fetchActivities={props.fetchActivities}
+          fetchWeeklies={props.fetchWeeklies}
           toggleCreateOn={props.toggleCreateOn}
-          users={props.users}
+          accounts={props.accounts}
         />
       ) : null}
-      <ActivityContainer>
+      <WeeklyContainer>
         <Title>
-          <h1>Activities</h1>
+          <h1>Weekly Updates</h1>
           <FiIcons.FiPlusSquare onClick={() => props.toggleCreateOn()} />
         </Title>
         <TableContainer>
           <Table>
             <thead>
               <tr>
-                <th scope='col'>Activities</th>
-                <th scope='col'>DueDate</th>
-                <th scope='col'>Campaign Manager</th>
+                <th scope='col'>WeeklyUpdate</th>
+                <th scope='col'>Job Count</th>
+                <th scope='col'>Active Campaigns</th>
+                <th scope='col'>Date</th>
                 <th scope='col'></th>
                 <th scope='col'></th>
               </tr>
             </thead>
-            <tbody>{ActivityMapper()}</tbody>
+            <tbody>{WeeklyMapper()}</tbody>
           </Table>
         </TableContainer>
-      </ActivityContainer>
-      {props.updateActive && editingActivity ? (
-        <ActivityEdit
+      </WeeklyContainer>
+      {props.updateActive && editingWeeklyUpdate ? (
+        <WeeklyEdit
           token={props.token}
           toggleEditOn={props.toggleEditOn}
-          activityToUpdate={editingActivity}
-          users={props.users}
-          fetchActivities={props.fetchActivities}
+          weeklyToUpdate={editingWeeklyUpdate}
+          accounts={props.accounts}
+          fetchWeeklies={props.fetchWeeklies}
         />
       ) : null}
     </>
   );
 };
 
-export default ActivityTable;
+export default WeeklyUpdateTable;
 
-export const ActivityContainer = styled.div`
+export const WeeklyContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
@@ -175,7 +173,7 @@ export const Table = styled.table`
 
   thead th:nth-child(1) {
     text-align: left;
-    width: 55%;
+    width: 60%;
     overflow: wrap;
   }
 
@@ -185,7 +183,7 @@ export const Table = styled.table`
   }
 
   thead th:nth-child(3) {
-    width: 20%;
+    width: 10%;
     text-align: center;
   }
 

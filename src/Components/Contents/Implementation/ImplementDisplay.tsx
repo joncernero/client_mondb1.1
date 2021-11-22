@@ -170,7 +170,7 @@ const EditButton = styled.div`
   background: #59328c;
   border-radius: 5px;
   margin: 15px;
-  padding: 5px;
+  padding: 10px;
 
   &:hover {
     background: transparent;

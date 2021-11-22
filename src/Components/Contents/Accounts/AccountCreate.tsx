@@ -107,6 +107,7 @@ const AccountCreate = (props: Props) => {
           <label htmlFor='accountName'>AccountName:</label>
           <input
             name='accountName'
+            type='text'
             value={accountName}
             onChange={(e) => setAccountName(e.target.value)}
           />
@@ -115,6 +116,7 @@ const AccountCreate = (props: Props) => {
           <label htmlFor='accountId'>Account ID:</label>
           <input
             name='accountId'
+            type='text'
             value={accountID}
             onChange={(e) => setAccountID(e.target.value)}
           />
@@ -123,6 +125,7 @@ const AccountCreate = (props: Props) => {
           <label htmlFor='customerNumber'>Customer #:</label>
           <input
             name='customerNumber'
+            type='text'
             value={customerNumber}
             onChange={(e) => setCustomerNumber(Number(e.target.value))}
           />
@@ -131,6 +134,7 @@ const AccountCreate = (props: Props) => {
           <label htmlFor='accountType'>AccountType:</label>
           <input
             name='accountType'
+            type='text'
             value={accountType}
             onChange={(e) => setAccountType(e.target.value)}
           />
@@ -148,6 +152,7 @@ const AccountCreate = (props: Props) => {
           <label htmlFor='primaryXCode'>Primary XCode:</label>
           <input
             name='primaryXCode'
+            type='text'
             value={primaryXCode}
             onChange={(e) => setPrimaryXCode(e.target.value)}
           />

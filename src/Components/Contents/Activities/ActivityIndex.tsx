@@ -70,7 +70,7 @@ const ActivityIndex = (props: Props) => {
     fetch(`${APIURL}/user`, {
       method: 'Get',
       headers: new Headers({
-        'Content-Type': 'application/Json',
+        'Content-Type': 'application/json',
         Authorization: `${localStorage.getItem('token')}`,
       }),
     })
@@ -109,6 +109,5 @@ export default ActivityIndex;
 
 export const Container = styled.div`
   height: 220px;
-  overflow: scroll;
   width: 100%;
 `;

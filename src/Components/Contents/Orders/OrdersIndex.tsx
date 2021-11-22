@@ -61,6 +61,7 @@ function OrdersIndex(props: Props) {
       .then((order) => {
         setOrder(order);
       })
+      .catch((error) => console.log(error))
       .finally(() => {
         setIsLoading(false);
       });
@@ -87,6 +88,7 @@ function OrdersIndex(props: Props) {
   useEffect(() => {
     fetchOrders();
   }, []);
+
   return (
     <>
       {showLoading()}
@@ -109,7 +111,6 @@ function OrdersIndex(props: Props) {
 export default OrdersIndex;
 
 export const Container = styled.div`
-  height: 220px;
-  overflow: scroll;
+  height: 250px;
   width: 100%;
 `;

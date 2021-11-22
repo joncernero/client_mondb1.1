@@ -49,7 +49,6 @@ const SingleAccountDisplay = (props: Props) => {
     return props.account.map((account: Account, index) => {
       return (
         <div key={index}>
-          <h1>Account Details</h1>
           <div>
             <label>Account Name:</label>
             <p>{account.accountName}</p>
@@ -110,6 +109,9 @@ const SingleAccountDisplay = (props: Props) => {
   return (
     <>
       <Container>
+        <Title>
+          <h1>Account Details</h1>
+        </Title>
         <div>{AccountMapper()}</div>
       </Container>
       {props.updateActive && editingAccount ? (
@@ -129,19 +131,23 @@ const SingleAccountDisplay = (props: Props) => {
 
 export default SingleAccountDisplay;
 
+export const Title = styled.div`
+  display: flex;
+`;
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   border: 3px solid #59328c;
   border-radius: 10px;
-  padding: 10px;
+  padding: 5px 10px;
   width: 100%;
 
-  div:not(:first-child) {
+  div {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin: 10px;
+    /* margin: 10px; */
   }
 
   div:nth-child(10) {
@@ -162,6 +168,7 @@ export const Container = styled.div`
   p {
     color: #000000;
     margin: 0 0 0 0;
+    margin-bottom: 10px;
   }
 
   button {

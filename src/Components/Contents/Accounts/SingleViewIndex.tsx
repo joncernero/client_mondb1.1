@@ -51,6 +51,7 @@ const SingleViewIndex = (props: Props) => {
       .then((account) => {
         setAccount(account);
       })
+      .catch((error) => console.log(error))
       .finally(() => {
         setIsLoading(false);
       });
@@ -87,7 +88,8 @@ const SingleViewIndex = (props: Props) => {
       .then((res) => res.json())
       .then((user) => {
         setUsers(user);
-      });
+      })
+      .catch((error) => console.log(error));
   };
 
   const fetchAgencies = () => {
@@ -101,7 +103,8 @@ const SingleViewIndex = (props: Props) => {
       .then((res) => res.json())
       .then((agency) => {
         setAgencies(agency);
-      });
+      })
+      .catch((error) => console.log(error));
   };
 
   return (

@@ -5,8 +5,19 @@ import AccountCreate from './AccountCreate';
 import { Spinner } from '../../Styles/Spinner';
 import styled from 'styled-components';
 
+type User = {
+  id: string;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  campaignManager: string;
+  role: string;
+};
+
 type Props = {
   token: string | null;
+  user: User;
 };
 
 const AccountIndex = (props: Props) => {
@@ -71,7 +82,7 @@ const AccountIndex = (props: Props) => {
         />
       ) : null}
       <Title>
-        {/* <h1>{`Welcome`}</h1> */}
+        <h2>{`Welcome ${props.user.firstName},`}</h2>
         <button
           onClick={() => {
             toggleCreateOn();
@@ -104,8 +115,10 @@ export const Container = styled.div`
 
 export const Title = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   color: #59328c;
-  margin: 0 15px 15px 15px;
+  margin: 0 15px 0 15px;
 
   button {
     align-self: flex-end;

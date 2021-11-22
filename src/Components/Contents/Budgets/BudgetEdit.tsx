@@ -41,6 +41,7 @@ type Budget = {
   spendAsOf: string;
   budgetAmount: number;
   spendAmount: number;
+  projectedSpend: number;
   credits: number;
   accountId: string;
   orderId: string;
@@ -70,6 +71,9 @@ const BudgetEdit = (props: Props) => {
   const [editSpendAmount, setEditSpendAmount] = useState(
     props.budgetToUpdate.spendAmount
   );
+  const [editProjectedSpend, setEditProjectedSpend] = useState(
+    props.budgetToUpdate.projectedSpend
+  );
   const [editCredits, setEditCredits] = useState(props.budgetToUpdate.credits);
 
   const BudgetUpdate = (e: React.SyntheticEvent): void => {
@@ -84,6 +88,7 @@ const BudgetEdit = (props: Props) => {
         spendAsOf: editSpendAsOf,
         budgetAmount: editBudgetAmount,
         spendAmount: editSpendAmount,
+        projectedSpend: editProjectedSpend,
         credits: editCredits,
       }),
       headers: new Headers({
@@ -204,6 +209,15 @@ const BudgetEdit = (props: Props) => {
             type='number'
             value={editSpendAmount}
             onChange={(e) => setEditSpendAmount(Number(e.target.value))}
+          />
+        </div>
+        <div>
+          <label htmlFor='editProjectedSpend'>Projected Spend:</label>
+          <input
+            name='editProjectedSpend'
+            type='number'
+            value={editProjectedSpend}
+            onChange={(e) => setEditProjectedSpend(Number(e.target.value))}
           />
         </div>
         <div>

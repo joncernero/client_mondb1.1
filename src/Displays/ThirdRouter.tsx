@@ -11,7 +11,6 @@ import {
 
 import OrdersIndex from '../Components/Contents/Orders/OrdersIndex';
 import BudgetsIndex from '../Components/Contents/Budgets/BudgetsIndex';
-import SalesIndex from '../Components/Contents/Sales/SalesIndex';
 import styled from 'styled-components';
 
 type Props = {
@@ -32,9 +31,6 @@ export default function SecondaryRouter(props: Props) {
           <li>
             <Link to={`${url}/budget/${id}`}>Budgets</Link>
           </li>
-          <li>
-            <Link to={`${url}/sales/${id}`}>Sales Info</Link>
-          </li>
         </ul>
 
         <ContentContainer>
@@ -44,9 +40,6 @@ export default function SecondaryRouter(props: Props) {
             </Route>
             <Route exact path={`${path}/budget/:id`}>
               <BudgetsIndex token={props.token} />
-            </Route>
-            <Route exact path={`${path}/sales/:id`}>
-              <SalesIndex token={props.token} />
             </Route>
           </Switch>
         </ContentContainer>
@@ -58,6 +51,7 @@ export default function SecondaryRouter(props: Props) {
 export const Container = styled.div`
   width: 100%;
   margin-bottom: 15px;
+  /* overflow: hidden; */
 
   ul {
     display: flex;
@@ -108,4 +102,5 @@ export const ContentContainer = styled.div`
   border-bottom-right-radius: 10px;
   padding: 25px;
   height: 250px;
+  overflow: scroll;
 `;

@@ -4,8 +4,19 @@ import Dashboard from './Displays/Dashboard';
 import UserIndex from './Components/Contents/Users/UserIndex';
 import AccountDisplay from './Displays/AccountDisplay';
 
+type User = {
+  id: string;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  campaignManager: string;
+  role: string;
+};
+
 type Props = {
   sessionToken: string | null;
+  user: User;
 };
 
 const Router = (props: Props) => {
@@ -13,7 +24,7 @@ const Router = (props: Props) => {
     let component;
 
     if (pageToShow === 'dashboard') {
-      component = <Dashboard token={props.sessionToken} />;
+      component = <Dashboard token={props.sessionToken} user={props.user} />;
     }
 
     if (pageToShow === 'user') {

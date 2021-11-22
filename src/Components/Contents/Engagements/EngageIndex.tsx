@@ -92,4 +92,5 @@ export default EngagementIndex;
 export const Container = styled.div`
   height: 220px;
   overflow: scroll;
+  width: 100%;
 `;

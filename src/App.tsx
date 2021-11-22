@@ -48,6 +48,11 @@ const App = (props: Props) => {
     setSessionToken(newToken);
   };
 
+  const updateUser = (newUser: User) => {
+    localStorage.setItem('user', JSON.stringify(newUser));
+    setCurrentUser(newUser);
+  };
+
   const clearToken = () => {
     localStorage.clear();
     setSessionToken('');
@@ -66,11 +71,13 @@ const App = (props: Props) => {
               sessionToken ? (
                 <Redirect to='/dashboard' />
               ) : (
-                <Login updateToken={updateToken} />
+                <Login updateToken={updateToken} updateUser={updateUser} />
               )
             }
           />
-          <Routes sessionToken={sessionToken} />
+          {currentUser && (
+            <Routes sessionToken={sessionToken} user={currentUser} />
+          )}
         </Switch>
       </>
     </Router>

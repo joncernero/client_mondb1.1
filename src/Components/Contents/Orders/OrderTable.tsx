@@ -186,7 +186,6 @@ export default OrderTable;
 export const OrderContainer = styled.div`
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 `;
 
 export const Title = styled.div`
@@ -197,19 +196,16 @@ export const Title = styled.div`
 `;
 
 export const TableContainer = styled.div`
-  overflow: hidden;
-  overflow-x: scroll;
+  overflow: scroll;
 `;
 
 export const Table = styled.table`
   table-layout: fixed;
-  /* width: 100%; */
-  height: auto;
+  width: 200%;
+  /* height: 200px; */
   padding: 5px 5px 10px 5px;
   border-collapse: separate;
   border-spacing: 0;
-  overflow: hidden;
-  overflow-x: scroll;
 
   thead {
     background: #59328c;
@@ -218,7 +214,7 @@ export const Table = styled.table`
 
   th {
     color: #ffffff;
-    padding: 5px 20px;
+    padding: 10px;
   }
 
   tbody tr {
@@ -239,7 +235,8 @@ export const Table = styled.table`
 
   tbody td {
     text-align: center;
-    padding: 5px 35px;
+    padding: 5px 5px;
+    /* width: 150px; */
   }
 
   button {

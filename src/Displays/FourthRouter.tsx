@@ -10,6 +10,7 @@ import {
 import ProviderIndex from '../Components/Contents/ProviderInfo/ProviderIndex';
 import ImplementIndex from '../Components/Contents/Implementation/ImplementIndex';
 import CampaignIndex from '../Components/Contents/Campaigns/CampaignIndex';
+import SalesIndex from '../Components/Contents/Sales/SalesIndex';
 import styled from 'styled-components';
 
 type Props = {
@@ -33,6 +34,9 @@ export default function SecondaryRouter(props: Props) {
           <li>
             <Link to={`${url}/Campaign/${id}`}>Campaign</Link>
           </li>
+          <li>
+            <Link to={`${url}/sales/${id}`}>Sales Info</Link>
+          </li>
         </ul>
 
         <ContentContainer>
@@ -45,6 +49,9 @@ export default function SecondaryRouter(props: Props) {
             </Route>
             <Route exact path={`${path}/campaign/:id`}>
               <CampaignIndex token={props.token} />
+            </Route>
+            <Route exact path={`${path}/sales/:id`}>
+              <SalesIndex token={props.token} />
             </Route>
           </Switch>
         </ContentContainer>

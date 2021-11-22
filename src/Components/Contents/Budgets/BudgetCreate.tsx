@@ -47,6 +47,7 @@ const BudgetCreate = (props: Props) => {
   const [spendAsOf, setSpendAsOf] = useState('');
   const [budgetAmount, setBudgetAmount] = useState(0.0);
   const [spendAmount, setSpendAmount] = useState(0.0);
+  const [projectedSpend, setProjectedSpend] = useState(0.0);
   const [credits, setCredits] = useState(0.0);
   const [accountId, setAccountId] = useState('');
   const [orderId, setOrderId] = useState('');
@@ -66,6 +67,7 @@ const BudgetCreate = (props: Props) => {
         spendAsOf: spendAsOf,
         budgetAmount: budgetAmount,
         spendAmount: spendAmount,
+        projectedSpend: projectedSpend,
         credits: credits,
         accountId: id,
         orderId: orderId,
@@ -84,6 +86,7 @@ const BudgetCreate = (props: Props) => {
         setSpendAsOf('');
         setBudgetAmount(0.0);
         setSpendAmount(0.0);
+        setProjectedSpend(0.0);
         setCredits(0.0);
         setAccountId('');
         setOrderId('');
@@ -234,6 +237,15 @@ const BudgetCreate = (props: Props) => {
             type='number'
             value={spendAmount}
             onChange={(e) => setSpendAmount(Number(e.target.value))}
+          />
+        </div>
+        <div>
+          <label htmlFor='projectedSpend'>Projected Spend:</label>
+          <input
+            name='projectedSpend'
+            type='number'
+            value={projectedSpend}
+            onChange={(e) => setProjectedSpend(Number(e.target.value))}
           />
         </div>
         <div>

@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import APIURL from '../../Utilities/Environments';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import { User } from '../../Types/user';
 
 type Props = {
   updateToken: (newToken: string) => void;
+  updateUser: (newUser: User) => void;
 };
 
 const Login = (props: Props) => {
@@ -28,13 +30,12 @@ const Login = (props: Props) => {
       .then((data) => {
         if (data.sessionToken) {
           props.updateToken(data.sessionToken);
-          localStorage.setItem('token', data.sessionToken);
-          localStorage.setItem('user', JSON.stringify(data.user));
+          props.updateUser(data.user);
           if (data.user.role === 'admin') {
             history.push('/user');
             return;
           }
-          history.push('/dashboard');
+          // history.push('/dashboard');
         } else {
           resetState();
         }

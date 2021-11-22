@@ -44,7 +44,7 @@ export default function SecondaryRouter(props: Props) {
               <EngagementIndex token={props.token} />
             </Route>
             <Route exact path={`${path}/weeklyupdate/:id`}>
-              <WeeklyIndex />
+              <WeeklyIndex token={props.token} />
             </Route>
           </Switch>
         </ContentContainer>
@@ -64,6 +64,7 @@ export const Container = styled.div`
     color: #ffffff;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
+    margin: 0 0 0 0;
   }
 
   li {
@@ -105,4 +106,5 @@ export const ContentContainer = styled.div`
   border-bottom-right-radius: 10px;
   padding: 25px;
   height: 250px;
+  overflow: scroll;
 `;

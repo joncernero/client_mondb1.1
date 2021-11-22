@@ -14,6 +14,7 @@ type Budget = {
   spendAsOf: string;
   budgetAmount: number;
   spendAmount: number;
+  projectedSpend: number;
   credits: number;
   dailyPacing: number;
   actualPacing: number;
@@ -41,6 +42,7 @@ function BudgetsIndex(props: Props) {
     spendAsOf: '',
     budgetAmount: 0.0,
     spendAmount: 0.0,
+    projectedSpend: 0.0,
     credits: 0.0,
     dailyPacing: 0.0,
     actualPacing: 0.0,
@@ -63,6 +65,7 @@ function BudgetsIndex(props: Props) {
       .then((budget) => {
         setBudget(budget);
       })
+      .catch((error) => console.log(error))
       .finally(() => {
         setIsLoading(false);
       });
@@ -112,6 +115,5 @@ export default BudgetsIndex;
 
 export const Container = styled.div`
   height: 220px;
-  overflow: scroll;
   width: 100%;
 `;

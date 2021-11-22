@@ -29,22 +29,20 @@ const AccountDisplay = (props: Props) => {
 export default AccountDisplay;
 
 export const Container = styled.div`
-  display: grid;
-  column-gap: 15px;
-  grid-template-areas:
-    'one two'
-    'one two'
-    'one two';
-  width: 100%;
-  height: 100vh;
-  padding: 20px;
+  display: flex;
+  column-gap: 5px;
+  margin: 0 100px;
 `;
 
 export const ChildOne = styled.div`
-  grid-area: one;
+  display: flex;
+  flex-direction: column;
   width: 25vw;
+  margin: 10px 0 0 50px;
 `;
 export const ChildTwo = styled.div`
-  grid-area: two;
+  display: flex;
+  flex-direction: column;
   width: 70vw;
+  margin: 10px 50px 0 5px;
 `;

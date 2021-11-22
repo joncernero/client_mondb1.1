@@ -120,7 +120,7 @@ export const Title = styled.div`
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 5px;
 
   div {
     margin: 0 5px;

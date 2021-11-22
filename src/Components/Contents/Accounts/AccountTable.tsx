@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import * as AiIcons from 'react-icons/ai';
 
 type User = {
   id: string;
@@ -35,6 +36,7 @@ type Props = {
 
 const AccountTable = (props: Props) => {
   const history = useHistory();
+  const [searchTerm, setSearchTerm] = useState('');
 
   const AccountsMapper = () => {
     return props.accounts.map((account: Account, index) => {
@@ -53,9 +55,37 @@ const AccountTable = (props: Props) => {
     });
   };
 
+  const searchAccounts = () => {
+    return props.accounts.filter((account: Account, index) => {
+      return searchTerm === account.accountName ? (
+        <tr key={index}>
+          <td onClick={() => history.push(`/account/${account.id}`)}>
+            {account.accountName}
+          </td>
+          <td>{account.accountID}</td>
+          <td>{account.customerNumber}</td>
+          <td>{account.accountType}</td>
+          <td>{account.assignmentDate}</td>
+          <td>{account.primaryXCode}</td>
+        </tr>
+      ) : null;
+    });
+  };
+
   return (
     <>
       <AccountContainer>
+        <Search>
+          <input
+            type='search'
+            placeholder='Search Accounts'
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <i>
+            <AiIcons.AiOutlineSearch />
+          </i>
+        </Search>
         <TableContainer>
           <Table>
             <thead>
@@ -69,6 +99,7 @@ const AccountTable = (props: Props) => {
               </tr>
             </thead>
             <tbody>{AccountsMapper()}</tbody>
+            {/* <tbody>{searchTerm ? searchAccounts() : AccountsMapper()}</tbody> */}
           </Table>
         </TableContainer>
       </AccountContainer>
@@ -83,12 +114,28 @@ export const AccountContainer = styled.div`
   flex-direction: column;
 `;
 
-export const Title = styled.div`
+export const Search = styled.div`
   display: flex;
-  color: #59328c;
   justify-content: space-between;
-  margin: 0 15px 15px 15px;
+  align-items: center;
+  border: 2px solid #59328c;
+  border-radius: 5px;
+  width: 600px;
+  height: 35px;
+  padding: 0 5px;
+  margin: 0 5px 10px 5px;
+
+  input {
+    border: none;
+  }
 `;
+
+// export const Title = styled.div`
+//   display: flex;
+//   color: #59328c;
+//   justify-content: space-between;
+//   margin: 0 15px 15px 15px;
+// `;
 
 export const TableContainer = styled.div``;
 
@@ -96,7 +143,7 @@ export const Table = styled.table`
   table-layout: fixed;
   width: 100%;
   height: 500px;
-  padding: 5px 5px 10px 5px;
+  padding: 0 5px 10px 5px;
   border-collapse: separate;
   border-spacing: 0;
 

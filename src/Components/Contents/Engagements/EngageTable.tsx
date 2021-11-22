@@ -115,7 +115,6 @@ export default EngagementTable;
 export const EngageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 `;
 
 export const Title = styled.div`
@@ -126,14 +125,13 @@ export const Title = styled.div`
 `;
 
 export const TableContainer = styled.div`
-  overflow: hidden;
-  overflow-x: scroll;
+  overflow: scroll;
 `;
 
 export const Table = styled.table`
   table-layout: fixed;
-  width: 100%;
-  height: 200px;
+  width: 150%;
+  /* height: 200px; */
   padding: 5px 5px 25px 5px;
   border-collapse: separate;
   border-spacing: 0;
@@ -150,7 +148,7 @@ export const Table = styled.table`
 
   thead th:nth-child(1) {
     text-align: left;
-    width: 70%;
+    width: 75%;
     overflow: wrap;
   }
 

@@ -14,6 +14,7 @@ type Budget = {
   spendAsOf: string;
   budgetAmount: number;
   spendAmount: number;
+  projectedSpend: number;
   credits: number;
   dailyPacing: number;
   actualPacing: number;
@@ -39,7 +40,7 @@ const BudgetTable = (props: Props) => {
 
   const DeleteBudget = (budget: Budget) => {
     console.log(budget.id);
-    fetch(`${APIURL}/order/delete/${budget.id}`, {
+    fetch(`${APIURL}/budget/delete/${budget.id}`, {
       method: 'Delete',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -67,6 +68,7 @@ const BudgetTable = (props: Props) => {
               <td>{FormatDate(budget.spendAsOf)}</td>
               <td>{'$' + budget.budgetAmount}</td>
               <td>{'$' + budget.spendAmount}</td>
+              <td>{'$' + budget.projectedSpend}</td>
               <td>{'$' + budget.rollOver}</td>
               <td>{'$' + budget.dailyPacing}</td>
               <td>{'$' + budget.actualPacing}</td>
@@ -118,6 +120,7 @@ const BudgetTable = (props: Props) => {
                 <th scope='col'>Spend As Of:</th>
                 <th scope='col'>Budget Amount:</th>
                 <th scope='col'>Spend Amount:</th>
+                <th scope='col'>Projected Spend:</th>
                 <th scope='col'>Roll Over:</th>
                 <th scope='col'>Daily Pacing:</th>
                 <th scope='col'>Actual Pacing:</th>
@@ -148,7 +151,6 @@ export default BudgetTable;
 export const BudgetContainer = styled.div`
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 `;
 
 export const Title = styled.div`
@@ -159,19 +161,16 @@ export const Title = styled.div`
 `;
 
 export const TableContainer = styled.div`
-  overflow: hidden;
-  overflow-x: scroll;
+  overflow: scroll;
 `;
 
 export const Table = styled.table`
   table-layout: fixed;
-  /* width: 100%; */
+  width: 200%;
   height: auto;
   padding: 5px 5px 10px 5px;
   border-collapse: separate;
   border-spacing: 0;
-  overflow: hidden;
-  overflow-x: scroll;
 
   thead {
     background: #59328c;
