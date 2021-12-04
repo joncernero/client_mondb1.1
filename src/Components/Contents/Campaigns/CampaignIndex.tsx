@@ -3,16 +3,7 @@ import APIURL from '../../../Utilities/Environments';
 import CampaignDisplay from './CampaignDisplay';
 import { useParams } from 'react-router-dom';
 import { Spinner } from '../../Styles/Spinner';
-
-type Campaign = {
-  id: string;
-  campaignMethod: string;
-  kpiRank: string;
-  kpiNotes: string;
-  onsetNotes: string;
-  pacing: string;
-  accountId: string;
-};
+import { Campaign } from '../../../Types/campaign';
 
 type Props = {
   token: string | null;

@@ -4,27 +4,8 @@ import WeeklyCreate from './WeeklyCreate';
 import WeeklyEdit from './WeeklyEdit';
 import styled from 'styled-components';
 import * as FiIcons from 'react-icons/fi';
-
-type Account = {
-  id: string;
-  accountName: string;
-  accountID: string;
-  customerNumber: number;
-  accountType: string;
-  assignmentDate: string;
-  primaryXCode: string;
-  userId: string;
-  agencyId: string;
-};
-
-type WeeklyUpdate = {
-  id: string;
-  weeklyUpdate: string;
-  jobCount: number;
-  activeCampaigns: number;
-  date: string;
-  accountId: string;
-};
+import { WeeklyUpdate } from '../../../Types/weeklyUpdate';
+import { Account } from '../../../Types/account';
 
 type Props = {
   token: string;

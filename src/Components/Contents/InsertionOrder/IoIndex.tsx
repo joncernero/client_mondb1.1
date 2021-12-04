@@ -3,14 +3,7 @@ import APIURL from '../../../Utilities/Environments';
 import IoTable from './IoTable';
 import styled from 'styled-components';
 import { Spinner } from '../../Styles/Spinner';
-
-type Io = {
-  id: string;
-  agencyIO: string;
-  ioBudget: number;
-  ioSpend: number;
-  agencyId: string;
-};
+import { Io } from '../../../Types/io';
 
 type Props = {
   token: string | null;

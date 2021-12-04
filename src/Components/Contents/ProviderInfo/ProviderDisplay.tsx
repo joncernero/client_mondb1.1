@@ -3,17 +3,7 @@ import ProviderCreate from './ProviderCreate';
 import ProviderEdit from './ProviderEdit';
 import styled from 'styled-components';
 import * as FiIcons from 'react-icons/fi';
-
-type Provider = {
-  id: string;
-  providerName: string;
-  providerCode: string;
-  providerId: string;
-  providerType: string;
-  jobSource: string;
-  vendorSource: string;
-  accountId: string;
-};
+import { Provider } from '../../../Types/provider';
 
 type Props = {
   token: string;
@@ -34,31 +24,31 @@ const ProviderDisplay = (props: Props) => {
   const ProviderMapper = () => {
     return props.provider.map((provider: Provider, index) => {
       return (
-        <div key={index}>
-          <div>
+        <ContentContainer key={index}>
+          <ItemContainer>
             <label>Provider Name:</label>
             <p>{provider.providerName}</p>
-          </div>
-          <div>
+          </ItemContainer>
+          <ItemContainer>
             <label>Provider Code:</label>
             <p>{provider.providerCode}</p>
-          </div>
-          <div>
+          </ItemContainer>
+          <ItemContainer>
             <label>Provider ID:</label>
             <p>{provider.providerId}</p>
-          </div>
-          <div>
+          </ItemContainer>
+          <ItemContainer>
             <label>Provider Type:</label>
             <p>{provider.providerType}</p>
-          </div>
-          <div>
+          </ItemContainer>
+          <ItemContainer>
             <label>Job Source:</label>
             <p>{provider.jobSource}</p>
-          </div>
-          <div>
+          </ItemContainer>
+          <ItemContainer>
             <label>Vendor Source:</label>
             <p>{provider.vendorSource}</p>
-          </div>
+          </ItemContainer>
           <EditButton
             onClick={() => {
               setEditingProvider(provider);
@@ -67,7 +57,7 @@ const ProviderDisplay = (props: Props) => {
             }}>
             Edit Provider
           </EditButton>
-        </div>
+        </ContentContainer>
       );
     });
   };
@@ -84,11 +74,14 @@ const ProviderDisplay = (props: Props) => {
       <ProviderContainer>
         <Title>
           <h1>Provider</h1>
-          <FiIcons.FiPlusSquare onClick={() => props.toggleCreateOn()} />
         </Title>
-        <Container>
-          <>{ProviderMapper()}</>
-        </Container>
+        <>
+          {props.provider.length > 0 ? (
+            ProviderMapper()
+          ) : (
+            <FiIcons.FiPlusSquare onClick={() => props.toggleCreateOn()} />
+          )}
+        </>
       </ProviderContainer>
       {props.updateActive && editingProvider ? (
         <ProviderEdit
@@ -110,22 +103,20 @@ export const ProviderContainer = styled.div`
 
 export const Title = styled.div`
   display: flex;
-  justify-content: space-between;
-  margin: 0 15px 15px 15px;
+  margin-bottom: 15px;
 `;
 
-export const Container = styled.div`
+export const ContentContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
+  margin: 15px 0;
+`;
 
-  div {
-    margin: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    flex-direction: row;
-  }
+export const ItemContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  flex-direction: row;
 
   label {
     align-self: flex-start;
@@ -141,16 +132,18 @@ export const Container = styled.div`
 `;
 
 const EditButton = styled.div`
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+  text-align: center;
   height: 35px;
-  width: 125px;
+  width: 200px;
   color: #ffffff;
   font-size: 15px;
   font-weight: bold;
   background: #59328c;
   border-radius: 5px;
-  margin: 15px;
   padding: 5px;
 
   &:hover {

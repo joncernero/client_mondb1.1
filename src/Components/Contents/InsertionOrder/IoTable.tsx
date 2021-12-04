@@ -4,19 +4,8 @@ import IoCreate from './IoCreate';
 import IoEdit from './IoEdit';
 import styled from 'styled-components';
 import * as FiIcons from 'react-icons/fi';
-
-type Agency = {
-  id: string;
-  agencyName: string;
-};
-
-type Io = {
-  id: string;
-  agencyIO: string;
-  ioBudget: number;
-  ioSpend: number;
-  agencyId: string;
-};
+import { Agency } from '../../../Types/agency';
+import { Io } from '../../../Types/io';
 
 type Props = {
   token: string;

@@ -3,18 +3,7 @@ import APIURL from '../../../Utilities/Environments';
 import SingleAccountDisplay from './SingleAccountDisplay';
 import { useParams } from 'react-router-dom';
 import { Spinner } from '../../Styles/Spinner';
-
-type Account = {
-  id: string;
-  accountName: string;
-  accountID: string;
-  customerNumber: number;
-  accountType: string;
-  assignmentDate: string;
-  primaryXCode: string;
-  userId: string;
-  agencyId: string;
-};
+import { Account } from '../../../Types/account';
 
 type Props = {
   token: string | null;

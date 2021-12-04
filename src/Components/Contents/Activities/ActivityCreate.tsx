@@ -3,16 +3,7 @@ import APIURL from '../../../Utilities/Environments';
 import { StyledModal, ModalClose, Title } from '../../Styles/Modal';
 import * as AiIcons from 'react-icons/ai';
 import { useParams } from 'react-router-dom';
-
-type User = {
-  id: string;
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  campaignManager: string;
-  role: string;
-};
+import { User } from '../../../Types/user';
 
 type Props = {
   token: string | null;

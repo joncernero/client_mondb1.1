@@ -3,17 +3,7 @@ import APIURL from '../../../Utilities/Environments';
 import StatusDisplay from './StatusDisplay';
 import { useParams } from 'react-router-dom';
 import { Spinner } from '../../Styles/Spinner';
-
-type Status = {
-  id: string;
-  atRiskAtOnset: string;
-  accountState: string;
-  introStatus: string;
-  health: string;
-  churnDate: string;
-  closeNotes: string;
-  accountId: string;
-};
+import { Status } from '../../../Types/status';
 
 type Props = {
   token: string | null;

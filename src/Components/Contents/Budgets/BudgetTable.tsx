@@ -4,25 +4,7 @@ import BudgetCreate from './BudgetCreate';
 import BudgetEdit from './BudgetEdit';
 import styled from 'styled-components';
 import * as FiIcons from 'react-icons/fi';
-
-type Budget = {
-  id: string;
-  year: string;
-  month: string;
-  startDate: string;
-  endDate: string;
-  spendAsOf: string;
-  budgetAmount: number;
-  spendAmount: number;
-  projectedSpend: number;
-  credits: number;
-  dailyPacing: number;
-  actualPacing: number;
-  rollOver: number;
-  buPercentage: number;
-  accountId: string;
-  orderId: string;
-};
+import { Budget } from '../../../Types/budget';
 
 type Props = {
   token: string;

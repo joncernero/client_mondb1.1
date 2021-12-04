@@ -2,16 +2,7 @@ import React, { useState } from 'react';
 import APIURL from '../../../Utilities/Environments';
 import { StyledModal, ModalClose, Title } from '../../Styles/Modal';
 import * as AiIcons from 'react-icons/ai';
-
-type Campaign = {
-  id: string;
-  campaignMethod: string;
-  kpiRank: string;
-  kpiNotes: string;
-  onsetNotes: string;
-  pacing: string;
-  accountId: string;
-};
+import { Campaign } from '../../../Types/campaign';
 
 type Props = {
   token: string | null;

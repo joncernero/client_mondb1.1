@@ -4,16 +4,7 @@ import Register from '../../Authorization/Register';
 import UserEdit from './UserEdit';
 import styled from 'styled-components';
 import * as FiIcons from 'react-icons/fi';
-
-type User = {
-  id: string;
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  campaignManager: string;
-  role: string;
-};
+import { User } from '../../../Types/user';
 
 type Props = {
   token: string | null;
@@ -28,7 +19,7 @@ type Props = {
 
 const UserTable = (props: Props) => {
   const [editingUser, setEditingUser] = useState<User | undefined>();
-  const [updateActive, setUpdateActive] = useState(false);
+  // const [updateActive, setUpdateActive] = useState(false);
 
   const deleteUser = (user: User) => {
     fetch(`${APIURL}/user/delete/${user.id}`, {

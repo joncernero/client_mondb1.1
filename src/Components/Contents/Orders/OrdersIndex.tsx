@@ -4,23 +4,7 @@ import OrderTable from './OrderTable';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { Spinner } from '../../Styles/Spinner';
-
-type Order = {
-  id: string;
-  orderNumber: string;
-  orderType: string;
-  startDate: string;
-  endDate: string;
-  campaignStartDate: string;
-  spendAsOfDate: string;
-  orderAmount: number;
-  budgetSpent: number;
-  contractType: string;
-  dailyPacing: number;
-  cbu: number;
-  accountId: string;
-  ioId: string;
-};
+import { Order } from '../../../Types/order';
 
 type Props = {
   token: string | null;

@@ -3,18 +3,7 @@ import APIURL from '../../../Utilities/Environments';
 import SalesDisplay from './SalesDisplay';
 import { useParams } from 'react-router-dom';
 import { Spinner } from '../../Styles/Spinner';
-
-type Sales = {
-  id: string;
-  ppcSales: string;
-  segment: string;
-  industry: string;
-  region: string;
-  ats: string;
-  salesChannel: string;
-  primarySales: string;
-  accountId: string;
-};
+import { Sales } from '../../../Types/sales';
 
 type Props = {
   token: string | null;

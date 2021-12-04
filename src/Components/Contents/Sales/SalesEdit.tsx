@@ -2,18 +2,7 @@ import React, { useState } from 'react';
 import APIURL from '../../../Utilities/Environments';
 import { StyledModal, ModalClose } from '../../Styles/Modal';
 import * as AiIcons from 'react-icons/ai';
-
-type Sales = {
-  id: string;
-  ppcSales: string;
-  segment: string;
-  industry: string;
-  region: string;
-  ats: string;
-  salesChannel: string;
-  primarySales: string;
-  accountId: string;
-};
+import { Sales } from '../../../Types/sales';
 
 type Props = {
   token: string | null;

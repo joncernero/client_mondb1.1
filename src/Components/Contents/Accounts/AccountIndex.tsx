@@ -40,7 +40,8 @@ const AccountIndex = (props: Props) => {
       })
       .finally(() => {
         setIsLoading(false);
-      });
+      })
+      .catch((error) => console.log(error));
   };
 
   const toggleCreateOn = () => {
@@ -60,7 +61,8 @@ const AccountIndex = (props: Props) => {
         .then((res) => res.json())
         .then((user) => {
           setUsers(user);
-        });
+        })
+        .catch((error) => console.log(error));
     };
     fetchUsers();
   }, []);
@@ -99,6 +101,7 @@ const AccountIndex = (props: Props) => {
           toggleCreateOn={toggleCreateOn}
           accounts={accounts}
           users={users}
+          showLoading={showLoading}
         />
       </Container>
     </>
@@ -109,7 +112,7 @@ export default AccountIndex;
 
 export const Container = styled.div`
   height: 80vh;
-  padding: 10px;
+  /* padding: 5px; */
   overflow: scroll;
 `;
 
@@ -118,7 +121,7 @@ export const Title = styled.div`
   align-items: center;
   justify-content: space-between;
   color: #59328c;
-  margin: 0 15px 0 15px;
+  /* margin: 0 15px 0 15px; */
 
   button {
     align-self: flex-end;

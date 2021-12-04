@@ -2,20 +2,7 @@ import React, { useState } from 'react';
 import APIURL from '../../../Utilities/Environments';
 import { StyledModal, ModalClose } from '../../Styles/Modal';
 import * as AiIcons from 'react-icons/ai';
-
-type Implementation = {
-  id: string;
-  mobileOptimized: string;
-  jobsURL: string;
-  pixelStatus: string;
-  sourceTag: string;
-  bidOptimizer: string;
-  awm: string;
-  military: string;
-  ejb: string;
-  guid: string;
-  eligibleForFree: string;
-};
+import { Implementation } from '../../../Types/implementation';
 
 type Props = {
   token: string | null;

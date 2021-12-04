@@ -3,20 +3,7 @@ import APIURL from '../../../Utilities/Environments';
 import ImplementDisplay from './ImplementDisplay';
 import { useParams } from 'react-router-dom';
 import { Spinner } from '../../Styles/Spinner';
-
-type Implementation = {
-  id: string;
-  mobileOptimized: string;
-  jobsURL: string;
-  pixelStatus: string;
-  sourceTag: string;
-  bidOptimizer: string;
-  awm: string;
-  military: string;
-  ejb: string;
-  guid: string;
-  eligibleForFree: string;
-};
+import { Implementation } from '../../../Types/implementation';
 
 type Props = {
   token: string | null;

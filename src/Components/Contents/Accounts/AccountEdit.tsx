@@ -2,33 +2,9 @@ import React, { useState } from 'react';
 import APIURL from '../../../Utilities/Environments';
 import { StyledModal, ModalClose, Title } from '../../Styles/Modal';
 import * as AiIcons from 'react-icons/ai';
-
-type Agency = {
-  id: string;
-  agencyName: string;
-};
-
-type User = {
-  id: string;
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  campaignManager: string;
-  role: string;
-};
-
-type Account = {
-  id: string;
-  accountName: string;
-  accountID: string;
-  customerNumber: number;
-  accountType: string;
-  assignmentDate: string;
-  primaryXCode: string;
-  userId: string;
-  agencyId: string;
-};
+import { Agency } from '../../../Types/agency';
+import { User } from '../../../Types/user';
+import { Account } from '../../../Types/account';
 
 type Props = {
   token: string | null;

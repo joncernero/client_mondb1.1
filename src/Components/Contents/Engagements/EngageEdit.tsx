@@ -2,13 +2,7 @@ import React, { useState } from 'react';
 import APIURL from '../../../Utilities/Environments';
 import { StyledModal, ModalClose, Title } from '../../Styles/Modal';
 import * as AiIcons from 'react-icons/ai';
-
-type Engagement = {
-  id: string;
-  engagementNote: string;
-  date: string;
-  accountId: string;
-};
+import { Engagement } from '../../../Types/engagement';
 
 type Props = {
   token: string | null;

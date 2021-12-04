@@ -4,25 +4,7 @@ import BudgetTable from './BudgetTable';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { Spinner } from '../../Styles/Spinner';
-
-type Budget = {
-  id: string;
-  year: string;
-  month: string;
-  startDate: string;
-  endDate: string;
-  spendAsOf: string;
-  budgetAmount: number;
-  spendAmount: number;
-  projectedSpend: number;
-  credits: number;
-  dailyPacing: number;
-  actualPacing: number;
-  rollOver: number;
-  buPercentage: number;
-  accountId: string;
-  orderId: string;
-};
+import { Budget } from '../../../Types/budget';
 
 type Props = {
   token: string | null;

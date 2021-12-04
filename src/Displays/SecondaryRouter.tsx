@@ -19,7 +19,6 @@ type Props = {
 export default function SecondaryRouter(props: Props) {
   const { id } = useParams<{ id?: string }>();
   let { path, url } = useRouteMatch();
-  console.log(id);
   return (
     <Router>
       <Container>

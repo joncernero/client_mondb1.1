@@ -4,16 +4,7 @@ import AgencyIndex from '../Agencies/AgencyIndex';
 import IoIndex from '../InsertionOrder/IoIndex';
 import APIURL from '../../../Utilities/Environments';
 import styled from 'styled-components';
-
-type User = {
-  id: string;
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  campaignManager: string;
-  role: string;
-};
+import { User } from '../../../Types/user';
 
 type Props = {
   token: string | null;

@@ -2,17 +2,7 @@ import React, { useState } from 'react';
 import APIURL from '../../../Utilities/Environments';
 import { StyledModal, ModalClose } from '../../Styles/Modal';
 import * as AiIcons from 'react-icons/ai';
-
-type Provider = {
-  id: string;
-  providerName: string;
-  providerCode: string;
-  providerId: string;
-  providerType: string;
-  jobSource: string;
-  vendorSource: string;
-  accountId: string;
-};
+import { Provider } from '../../../Types/provider';
 
 type Props = {
   token: string | null;

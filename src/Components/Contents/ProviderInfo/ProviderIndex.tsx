@@ -3,17 +3,7 @@ import APIURL from '../../../Utilities/Environments';
 import ProviderDisplay from './ProviderDisplay';
 import { useParams } from 'react-router-dom';
 import { Spinner } from '../../Styles/Spinner';
-
-type Provider = {
-  id: string;
-  providerName: string;
-  providerCode: string;
-  providerId: string;
-  providerType: string;
-  jobSource: string;
-  vendorSource: string;
-  accountId: string;
-};
+import { Provider } from '../../../Types/provider';
 
 type Props = {
   token: string | null;

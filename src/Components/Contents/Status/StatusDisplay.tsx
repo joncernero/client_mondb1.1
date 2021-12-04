@@ -3,17 +3,7 @@ import StatusCreate from './StatusCreate';
 import StatusEdit from './StatusEdit';
 import styled from 'styled-components';
 import * as FiIcons from 'react-icons/fi';
-
-type Status = {
-  id: string;
-  atRiskAtOnset: string;
-  accountState: string;
-  introStatus: string;
-  health: string;
-  churnDate: string;
-  closeNotes: string;
-  accountId: string;
-};
+import { Status } from '../../../Types/status';
 
 type Props = {
   token: string | null;
@@ -84,10 +74,15 @@ const StatusDisplay = (props: Props) => {
       <StatusContainer>
         <Title>
           <h1>Status</h1>
-          <FiIcons.FiPlusSquare onClick={() => props.toggleCreateOn()} />
         </Title>
         <Container>
-          <>{StatusMapper()}</>
+          <>
+            {props.status.length > 0 ? (
+              StatusMapper()
+            ) : (
+              <FiIcons.FiPlusSquare onClick={() => props.toggleCreateOn()} />
+            )}
+          </>
         </Container>
       </StatusContainer>
       {props.updateActive && editingStatus ? (
@@ -114,16 +109,15 @@ export const StatusContainer = styled.div`
 export const Title = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 15px 10px 5px 15px;
+  margin: 15px 10px 5px 10px;
 `;
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 5px;
+  margin: 10px 10px 15px 10px;
 
   div {
-    margin: 0 5px;
     display: flex;
     flex-direction: column;
   }

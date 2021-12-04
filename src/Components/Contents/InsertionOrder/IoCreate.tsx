@@ -2,11 +2,7 @@ import React, { useState, useEffect } from 'react';
 import APIURL from '../../../Utilities/Environments';
 import { StyledModal, ModalClose, Title } from '../../Styles/Modal';
 import * as AiIcons from 'react-icons/ai';
-
-type Agency = {
-  id: string;
-  agencyName: string;
-};
+import { Agency } from '../../../Types/agency';
 
 type Props = {
   token: string | null;

@@ -4,13 +4,7 @@ import EngagementCreate from './EngageCreate';
 import EngagementEdit from './EngageEdit';
 import styled from 'styled-components';
 import * as FiIcons from 'react-icons/fi';
-
-type Engagement = {
-  id: string;
-  engagementNote: string;
-  date: string;
-  accountId: string;
-};
+import { Engagement } from '../../../Types/engagement';
 
 type Props = {
   token: string;

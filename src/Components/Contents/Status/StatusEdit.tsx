@@ -2,17 +2,7 @@ import React, { useState } from 'react';
 import APIURL from '../../../Utilities/Environments';
 import { StyledModal, ModalClose, Title } from '../../Styles/Modal';
 import * as AiIcons from 'react-icons/ai';
-
-type Status = {
-  id: string;
-  atRiskAtOnset: string;
-  accountState: string;
-  introStatus: string;
-  health: string;
-  churnDate: string;
-  closeNotes: string;
-  accountId: string;
-};
+import { Status } from '../../../Types/status';
 
 type Props = {
   token: string | null;

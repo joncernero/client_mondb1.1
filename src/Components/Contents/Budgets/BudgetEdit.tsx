@@ -2,50 +2,9 @@ import React, { useState } from 'react';
 import APIURL from '../../../Utilities/Environments';
 import { StyledModal, ModalClose } from '../../Styles/Modal';
 import * as AiIcons from 'react-icons/ai';
-
-type Account = {
-  id: string;
-  accountName: string;
-  accountID: string;
-  customerNumber: number;
-  accountType: string;
-  assignmentDate: string;
-  primaryXCode: string;
-  userId: string;
-  agencyId: string;
-};
-
-type Order = {
-  id: string;
-  orderNumber: string;
-  orderType: string;
-  startDate: string;
-  endDate: string;
-  campaignStartDate: string;
-  spendAsOfDate: string;
-  orderAmount: number;
-  budgetSpent: number;
-  contractType: string;
-  dailyPacing: number;
-  cbu: number;
-  accountId: string;
-  ioId: string;
-};
-
-type Budget = {
-  id: string;
-  year: string;
-  month: string;
-  startDate: string;
-  endDate: string;
-  spendAsOf: string;
-  budgetAmount: number;
-  spendAmount: number;
-  projectedSpend: number;
-  credits: number;
-  accountId: string;
-  orderId: string;
-};
+// import { Account } from '../../../Types/account';
+// import { Order } from '../../../Types/order';
+import { Budget } from '../../../Types/budget';
 
 type Props = {
   token: string | null;

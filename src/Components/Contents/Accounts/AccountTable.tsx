@@ -1,29 +1,9 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import * as AiIcons from 'react-icons/ai';
-
-type User = {
-  id: string;
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  campaignManager: string;
-  role: string;
-};
-
-type Account = {
-  id: string;
-  accountName: string;
-  accountID: string;
-  customerNumber: number;
-  accountType: string;
-  assignmentDate: string;
-  primaryXCode: string;
-  userId: string;
-  agencyId: string;
-};
+import { User } from '../../../Types/user';
+import { Account } from '../../../Types/account';
 
 type Props = {
   token: string | null;
@@ -32,15 +12,37 @@ type Props = {
   fetchAccounts: Function;
   createActive: boolean;
   toggleCreateOn: Function;
+  showLoading: Function;
 };
 
 const AccountTable = (props: Props) => {
+  const [query, setQuery] = useState('');
+  const [filteredUser, setFilteredUser] = useState('');
+
   const history = useHistory();
-  const [searchTerm, setSearchTerm] = useState('');
 
-  const AccountsMapper = () => {
-    return props.accounts.map((account: Account, index) => {
-      return (
+  const AccountsMapperWithFilter = () => {
+    return props.accounts
+      .filter((account: Account) => {
+        if (filteredUser === '') {
+          return account;
+        } else if (filteredUser === account.userId) {
+          return account;
+        }
+      })
+      .filter((account: Account) => {
+        if (query === '') {
+          return account;
+        } else if (
+          (
+            account.accountName.toLowerCase() ||
+            account.accountName.toUpperCase()
+          ).includes(query.toLowerCase() || query.toUpperCase())
+        ) {
+          return account;
+        }
+      })
+      .map((account: Account, index) => (
         <tr key={index}>
           <td onClick={() => history.push(`/account/${account.id}`)}>
             {account.accountName}
@@ -48,44 +50,38 @@ const AccountTable = (props: Props) => {
           <td>{account.accountID}</td>
           <td>{account.customerNumber}</td>
           <td>{account.accountType}</td>
-          <td>{account.assignmentDate}</td>
-          <td>{account.primaryXCode}</td>
         </tr>
-      );
-    });
+      ));
   };
-
-  const searchAccounts = () => {
-    return props.accounts.filter((account: Account, index) => {
-      return searchTerm === account.accountName ? (
-        <tr key={index}>
-          <td onClick={() => history.push(`/account/${account.id}`)}>
-            {account.accountName}
-          </td>
-          <td>{account.accountID}</td>
-          <td>{account.customerNumber}</td>
-          <td>{account.accountType}</td>
-          <td>{account.assignmentDate}</td>
-          <td>{account.primaryXCode}</td>
-        </tr>
-      ) : null;
-    });
-  };
-
   return (
     <>
       <AccountContainer>
-        <Search>
-          <input
-            type='search'
-            placeholder='Search Accounts'
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <i>
-            <AiIcons.AiOutlineSearch />
-          </i>
-        </Search>
+        {props.showLoading()}
+        <SearchContainer>
+          <Search>
+            <input
+              type='search'
+              width={100}
+              placeholder='Search Account Name'
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+            <i>
+              <AiIcons.AiOutlineSearch />
+            </i>
+          </Search>
+          <Filter>
+            <label htmlFor='userId'>Campaign Manager:</label>
+            <select onChange={(e) => setFilteredUser(e.target.value)}>
+              <option value='default'></option>
+              {props.users.map((user: User, index) => (
+                <option key={index} value={user.id}>
+                  {user.campaignManager}
+                </option>
+              ))}
+            </select>
+          </Filter>
+        </SearchContainer>
         <TableContainer>
           <Table>
             <thead>
@@ -94,12 +90,9 @@ const AccountTable = (props: Props) => {
                 <th scope='col'>AccountID</th>
                 <th scope='col'>Customer #</th>
                 <th scope='col'>AccountType</th>
-                <th scope='col'>Assignment Date</th>
-                <th scope='col'>primary XCode</th>
               </tr>
             </thead>
-            <tbody>{AccountsMapper()}</tbody>
-            {/* <tbody>{searchTerm ? searchAccounts() : AccountsMapper()}</tbody> */}
+            <tbody>{AccountsMapperWithFilter()}</tbody>
           </Table>
         </TableContainer>
       </AccountContainer>
@@ -113,37 +106,12 @@ export const AccountContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
-export const Search = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: 2px solid #59328c;
-  border-radius: 5px;
-  width: 600px;
-  height: 35px;
-  padding: 0 5px;
-  margin: 0 5px 10px 5px;
-
-  input {
-    border: none;
-  }
-`;
-
-// export const Title = styled.div`
-//   display: flex;
-//   color: #59328c;
-//   justify-content: space-between;
-//   margin: 0 15px 15px 15px;
-// `;
-
 export const TableContainer = styled.div``;
 
 export const Table = styled.table`
   table-layout: fixed;
   width: 100%;
-  height: 500px;
-  padding: 0 5px 10px 5px;
+  height: auto;
   border-collapse: separate;
   border-spacing: 0;
 
@@ -219,3 +187,57 @@ export const Table = styled.table`
     }
   }
 `;
+
+export const SearchContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 0 15px 0;
+`;
+
+export const Search = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid #59328c;
+  border-radius: 5px;
+  width: 300px;
+  height: 35px;
+  padding: 0 5px;
+
+  input {
+    border: none;
+  }
+`;
+
+export const Filter = styled.div`
+  display: flex;
+  align-items: center;
+
+  label {
+    color: #59328c;
+    margin-right: 10px;
+    font-weight: bold;
+  }
+  select {
+    display: flex;
+    border: 2px solid #59328c;
+    border-radius: 5px;
+    width: 300px;
+    height: 35px;
+  }
+`;
+
+/*if (query === '') {
+          return account;
+        } else if (
+          (
+            account.accountName.toLowerCase() ||
+            account.accountName.toUpperCase()
+          ).includes(query.toLowerCase() || query.toUpperCase())
+        ) {
+          return account;
+        }*/
+
+/* if (filteredUser === account.userId ) { return account;} */

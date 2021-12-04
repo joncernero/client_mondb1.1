@@ -4,24 +4,8 @@ import ActivityCreate from './ActivityCreate';
 import ActivityEdit from './ActivityEdit';
 import styled from 'styled-components';
 import * as FiIcons from 'react-icons/fi';
-
-type User = {
-  id: string;
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  campaignManager: string;
-  role: string;
-};
-
-type Activity = {
-  id: string;
-  activityNotes: string;
-  dueDate: string;
-  accountId: string;
-  userId: string;
-};
+import { User } from '../../../Types/user';
+import { Activity } from '../../../Types/activity';
 
 type Props = {
   token: string;
@@ -58,7 +42,6 @@ const ActivityTable = (props: Props) => {
   };
 
   const ActivityMapper = () => {
-    console.log(props.activities);
     return props.activities.length > 0
       ? props.activities.map((activity: Activity, index) => {
           return (

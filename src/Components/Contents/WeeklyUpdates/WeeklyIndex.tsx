@@ -4,15 +4,7 @@ import WeeklyTable from './WeeklyTable';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { Spinner } from '../../Styles/Spinner';
-
-type WeeklyUpdate = {
-  id: string;
-  weeklyUpdate: string;
-  jobCount: number;
-  activeCampaigns: number;
-  date: string;
-  accountId: string;
-};
+import { WeeklyUpdate } from '../../../Types/weeklyUpdate';
 
 type Props = {
   token: string | null;

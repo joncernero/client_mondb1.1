@@ -2,27 +2,8 @@ import React, { useState } from 'react';
 import APIURL from '../../../Utilities/Environments';
 import { StyledModal, ModalClose, Title } from '../../Styles/Modal';
 import * as AiIcons from 'react-icons/ai';
-
-type Account = {
-  id: string;
-  accountName: string;
-  accountID: string;
-  customerNumber: number;
-  accountType: string;
-  assignmentDate: string;
-  primaryXCode: string;
-  userId: string;
-  agencyId: string;
-};
-
-type WeeklyUpdate = {
-  id: string;
-  weeklyUpdate: string;
-  jobCount: number;
-  activeCampaigns: number;
-  date: string;
-  accountId: string;
-};
+import { WeeklyUpdate } from '../../../Types/weeklyUpdate';
+import { Account } from '../../../Types/account';
 
 type Props = {
   token: string | null;

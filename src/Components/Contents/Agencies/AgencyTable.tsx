@@ -37,7 +37,6 @@ const AgencyTable = (props: Props) => {
   };
 
   const AgencyMapper = () => {
-    console.log(props.agencies);
     return props.agencies.map((agency: Agency, index) => {
       return (
         <tr key={index}>

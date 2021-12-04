@@ -4,13 +4,7 @@ import EngagementTable from './EngageTable';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { Spinner } from '../../Styles/Spinner';
-
-type Engagement = {
-  id: string;
-  engagementNote: string;
-  date: string;
-  accountId: string;
-};
+import { Engagement } from '../../../Types/engagement';
 
 type Props = {
   token: string | null;

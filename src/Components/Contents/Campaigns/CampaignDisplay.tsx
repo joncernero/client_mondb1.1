@@ -3,16 +3,7 @@ import CampaignCreate from './CampaignCreate';
 import CampaignEdit from './CampaignEdit';
 import styled from 'styled-components';
 import * as FiIcons from 'react-icons/fi';
-
-type Campaign = {
-  id: string;
-  campaignMethod: string;
-  kpiRank: string;
-  kpiNotes: string;
-  onsetNotes: string;
-  pacing: string;
-  accountId: string;
-};
+import { Campaign } from '../../../Types/campaign';
 
 type Props = {
   token: string;
@@ -33,27 +24,27 @@ const CampaignDisplay = (props: Props) => {
   const CampaignMapper = () => {
     return props.campaign.map((campaign: Campaign, index) => {
       return (
-        <div key={index}>
-          <div>
+        <ContentContainer key={index}>
+          <ItemContainer>
             <label>Campaign Method:</label>
             <p>{campaign.campaignMethod}</p>
-          </div>
-          <div>
+          </ItemContainer>
+          <ItemContainer>
             <label>KPI Rank:</label>
             <p>{campaign.kpiRank}</p>
-          </div>
-          <div>
+          </ItemContainer>
+          <ItemContainer>
             <label>KPI Notes:</label>
             <p>{campaign.kpiNotes}</p>
-          </div>
-          <div>
+          </ItemContainer>
+          <ItemContainer>
             <label>Onset Notes:</label>
             <p>{campaign.onsetNotes}</p>
-          </div>
-          <div>
+          </ItemContainer>
+          <ItemContainer>
             <label>Campaign Pacing Type:</label>
             <p>{campaign.pacing}</p>
-          </div>
+          </ItemContainer>
           <EditButton
             onClick={() => {
               setEditingCampaign(campaign);
@@ -62,7 +53,7 @@ const CampaignDisplay = (props: Props) => {
             }}>
             Edit Campaign
           </EditButton>
-        </div>
+        </ContentContainer>
       );
     });
   };
@@ -79,11 +70,14 @@ const CampaignDisplay = (props: Props) => {
       <CampaignContainer>
         <Title>
           <h1>Campaign</h1>
-          <FiIcons.FiPlusSquare onClick={() => props.toggleCreateOn()} />
         </Title>
-        <Container>
-          <>{CampaignMapper()}</>
-        </Container>
+        <>
+          {props.campaign.length > 0 ? (
+            CampaignMapper()
+          ) : (
+            <FiIcons.FiPlusSquare onClick={() => props.toggleCreateOn()} />
+          )}
+        </>
       </CampaignContainer>
       {props.updateActive && editingCampaign ? (
         <CampaignEdit
@@ -105,22 +99,20 @@ export const CampaignContainer = styled.div`
 
 export const Title = styled.div`
   display: flex;
-  justify-content: space-between;
-  margin: 0 15px 15px 15px;
+  margin-bottom: 15px;
 `;
 
-export const Container = styled.div`
+export const ContentContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
+  margin: 15px 0;
+`;
 
-  div {
-    margin: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    flex-direction: row;
-  }
+export const ItemContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  flex-direction: row;
 
   label {
     align-self: flex-start;
@@ -138,6 +130,7 @@ export const Container = styled.div`
 const EditButton = styled.div`
   display: flex;
   align-items: center;
+  align-self: center;
   justify-content: center;
   height: 35px;
   width: 200px;

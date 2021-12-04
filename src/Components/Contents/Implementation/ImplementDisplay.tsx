@@ -3,20 +3,7 @@ import ImplementCreate from './ImplementCreate';
 import ImplementEdit from './ImplementEdit';
 import styled from 'styled-components';
 import * as FiIcons from 'react-icons/fi';
-
-type Implementation = {
-  id: string;
-  mobileOptimized: string;
-  jobsURL: string;
-  pixelStatus: string;
-  sourceTag: string;
-  bidOptimizer: string;
-  awm: string;
-  military: string;
-  ejb: string;
-  guid: string;
-  eligibleForFree: string;
-};
+import { Implementation } from '../../../Types/implementation';
 
 type Props = {
   token: string;
@@ -37,47 +24,47 @@ const ImplementDisplay = (props: Props) => {
   const ImplementMapper = () => {
     return props.implementation.map((implement: Implementation, index) => {
       return (
-        <div key={index}>
-          <div>
+        <ContentContainer key={index}>
+          <ItemContainer>
             <label>Mobile Optimized:</label>
             <p>{implement.mobileOptimized}</p>
-          </div>
-          <div>
+          </ItemContainer>
+          <ItemContainer>
             <label>Jobs URL:</label>
             <p>{implement.jobsURL}</p>
-          </div>
-          <div>
+          </ItemContainer>
+          <ItemContainer>
             <label>Pixel Status:</label>
             <p>{implement.pixelStatus}</p>
-          </div>
-          <div>
+          </ItemContainer>
+          <ItemContainer>
             <label>Source Tag:</label>
             <p>{implement.sourceTag}</p>
-          </div>
-          <div>
+          </ItemContainer>
+          <ItemContainer>
             <label>Bid Optimizer:</label>
             <p>{implement.bidOptimizer}</p>
-          </div>
-          <div>
+          </ItemContainer>
+          <ItemContainer>
             <label>AwM:</label>
             <p>{implement.awm}</p>
-          </div>
-          <div>
+          </ItemContainer>
+          <ItemContainer>
             <label>Military:</label>
             <p>{implement.military}</p>
-          </div>
-          <div>
+          </ItemContainer>
+          <ItemContainer>
             <label>EJB:</label>
             <p>{implement.ejb}</p>
-          </div>
-          <div>
+          </ItemContainer>
+          <ItemContainer>
             <label>GUID:</label>
             <p>{implement.guid}</p>
-          </div>
-          <div>
+          </ItemContainer>
+          <ItemContainer>
             <label>Eligible For Free:</label>
             <p>{implement.eligibleForFree}</p>
-          </div>
+          </ItemContainer>
           <EditButton
             onClick={() => {
               setEditingImplementation(implement);
@@ -86,7 +73,7 @@ const ImplementDisplay = (props: Props) => {
             }}>
             Edit Implementation
           </EditButton>
-        </div>
+        </ContentContainer>
       );
     });
   };
@@ -103,11 +90,14 @@ const ImplementDisplay = (props: Props) => {
       <ImplementContainer>
         <Title>
           <h1>Implementation</h1>
-          <FiIcons.FiPlusSquare onClick={() => props.toggleCreateOn()} />
         </Title>
-        <Container>
-          <>{ImplementMapper()}</>
-        </Container>
+        <>
+          {props.implementation.length > 0 ? (
+            ImplementMapper()
+          ) : (
+            <FiIcons.FiPlusSquare onClick={() => props.toggleCreateOn()} />
+          )}
+        </>
       </ImplementContainer>
       {props.updateActive && editingImplementation ? (
         <ImplementEdit
@@ -129,22 +119,20 @@ export const ImplementContainer = styled.div`
 
 export const Title = styled.div`
   display: flex;
-  justify-content: space-between;
-  margin: 0 15px 15px 15px;
+  margin-bottom: 15px;
 `;
 
-export const Container = styled.div`
+export const ContentContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
+  margin: 15px 0;
+`;
 
-  div {
-    margin: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    flex-direction: row;
-  }
+export const ItemContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  flex-direction: row;
 
   label {
     align-self: flex-start;
@@ -160,8 +148,10 @@ export const Container = styled.div`
 `;
 
 const EditButton = styled.div`
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
   height: 35px;
   width: 200px;
   color: #ffffff;
@@ -169,7 +159,6 @@ const EditButton = styled.div`
   font-weight: bold;
   background: #59328c;
   border-radius: 5px;
-  margin: 15px;
   padding: 10px;
 
   &:hover {

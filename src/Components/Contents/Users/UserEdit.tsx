@@ -2,16 +2,7 @@ import React, { useState } from 'react';
 import { StyledModal, ModalClose, Title } from '../../Styles/Modal';
 import APIURL from '../../../Utilities/Environments';
 import * as AiIcons from 'react-icons/ai';
-
-type User = {
-  id: string;
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  campaignManager: string;
-  role: string;
-};
+import { User } from '../../../Types/user';
 
 type Props = {
   token: string | null;

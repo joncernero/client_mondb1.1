@@ -4,23 +4,7 @@ import OrderCreate from './OrderCreate';
 import OrderEdit from './OrderEdit';
 import styled from 'styled-components';
 import * as FiIcons from 'react-icons/fi';
-
-type Order = {
-  id: string;
-  orderNumber: string;
-  orderType: string;
-  startDate: string;
-  endDate: string;
-  campaignStartDate: string;
-  spendAsOfDate: string;
-  orderAmount: number;
-  budgetSpent: number;
-  contractType: string;
-  dailyPacing: number;
-  cbu: number;
-  accountId: string;
-  ioId: string;
-};
+import { Order } from '../../../Types/order';
 
 type Props = {
   token: string;

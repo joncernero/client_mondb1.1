@@ -3,18 +3,7 @@ import SalesCreate from './SalesCreate';
 import SalesEdit from './SalesEdit';
 import styled from 'styled-components';
 import * as FiIcons from 'react-icons/fi';
-
-type Sales = {
-  id: string;
-  ppcSales: string;
-  segment: string;
-  industry: string;
-  region: string;
-  ats: string;
-  salesChannel: string;
-  primarySales: string;
-  accountId: string;
-};
+import { Sales } from '../../../Types/sales';
 
 type Props = {
   token: string;
@@ -33,35 +22,35 @@ const SalesDisplay = (props: Props) => {
   const SalesMapper = () => {
     return props.sales.map((sales: Sales, index) => {
       return (
-        <div key={index}>
-          <div>
+        <ContentContainer key={index}>
+          <ItemContainer>
             <label>PPC Sales Rep:</label>
             <p>{sales.ppcSales}</p>
-          </div>
-          <div>
+          </ItemContainer>
+          <ItemContainer>
             <label>Segment:</label>
             <p>{sales.segment}</p>
-          </div>
-          <div>
+          </ItemContainer>
+          <ItemContainer>
             <label>Industry:</label>
             <p>{sales.industry}</p>
-          </div>
-          <div>
+          </ItemContainer>
+          <ItemContainer>
             <label>Region:</label>
             <p>{sales.region}</p>
-          </div>
-          <div>
+          </ItemContainer>
+          <ItemContainer>
             <label>Customer ATS:</label>
             <p>{sales.ats}</p>
-          </div>
-          <div>
+          </ItemContainer>
+          <ItemContainer>
             <label>Sales Channel:</label>
             <p>{sales.salesChannel}</p>
-          </div>
-          <div>
+          </ItemContainer>
+          <ItemContainer>
             <label>Primary Sales Rep:</label>
             <p>{sales.primarySales}</p>
-          </div>
+          </ItemContainer>
           <EditButton
             onClick={() => {
               setEditingSales(sales);
@@ -70,7 +59,7 @@ const SalesDisplay = (props: Props) => {
             }}>
             Edit Campaign
           </EditButton>
-        </div>
+        </ContentContainer>
       );
     });
   };
@@ -87,11 +76,14 @@ const SalesDisplay = (props: Props) => {
       <SalesContainer>
         <Title>
           <h1>Sales</h1>
-          <FiIcons.FiPlusSquare onClick={() => props.toggleCreateOn()} />
         </Title>
-        <Container>
-          <>{SalesMapper()}</>
-        </Container>
+        <>
+          {props.sales.length > 0 ? (
+            SalesMapper()
+          ) : (
+            <FiIcons.FiPlusSquare onClick={() => props.toggleCreateOn()} />
+          )}
+        </>
       </SalesContainer>
       {props.updateActive && editingSales ? (
         <SalesEdit
@@ -113,22 +105,20 @@ export const SalesContainer = styled.div`
 
 export const Title = styled.div`
   display: flex;
-  justify-content: space-between;
-  margin: 0 15px 15px 15px;
+  margin-bottom: 15px;
 `;
 
-export const Container = styled.div`
+export const ContentContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
+  margin: 15px 0;
+`;
 
-  div {
-    margin: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    flex-direction: row;
-  }
+export const ItemContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  flex-direction: row;
 
   label {
     align-self: flex-start;
@@ -144,8 +134,10 @@ export const Container = styled.div`
 `;
 
 const EditButton = styled.div`
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
   height: 35px;
   width: 200px;
   color: #ffffff;
@@ -153,7 +145,6 @@ const EditButton = styled.div`
   font-weight: bold;
   background: #59328c;
   border-radius: 5px;
-  margin: 15px;
   padding: 5px;
 
   &:hover {

@@ -2,33 +2,9 @@ import React, { useState } from 'react';
 // import APIURL from '../../../Utilities/Environments';
 import AccountEdit from './AccountEdit';
 import styled from 'styled-components';
-
-type Agency = {
-  id: string;
-  agencyName: string;
-};
-
-type User = {
-  id: string;
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  campaignManager: string;
-  role: string;
-};
-
-type Account = {
-  id: string;
-  accountName: string;
-  accountID: string;
-  customerNumber: number;
-  accountType: string;
-  assignmentDate: string;
-  primaryXCode: string;
-  userId: string;
-  agencyId: string;
-};
+import { Agency } from '../../../Types/agency';
+import { User } from '../../../Types/user';
+import { Account } from '../../../Types/account';
 
 type Props = {
   token: string | null;
@@ -55,7 +31,7 @@ const SingleAccountDisplay = (props: Props) => {
           </div>
           <div>
             <label>Account ID:</label>
-            <p>{account.accountName}</p>
+            <p>{account.accountID}</p>
           </div>
           <div>
             <label>Customer Number:</label>

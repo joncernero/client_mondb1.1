@@ -4,14 +4,7 @@ import ActivityTable from './ActivityTable';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { Spinner } from '../../Styles/Spinner';
-
-type Activity = {
-  id: string;
-  activityNotes: string;
-  dueDate: string;
-  accountId: string;
-  userId: string;
-};
+import { Activity } from '../../../Types/activity';
 
 type Props = {
   token: string | null;
