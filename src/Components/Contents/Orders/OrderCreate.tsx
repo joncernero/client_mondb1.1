@@ -22,8 +22,8 @@ const OrderCreate = (props: Props) => {
   const [spendAsOfDate, setSpendAsOfDate] = useState('');
   const [budgetSpent, setBudgetSpent] = useState(0.0);
   const [contractType, setContractType] = useState('');
-  const [accountId, setAccountId] = useState('');
-  const [ioId, setIoId] = useState('');
+  const [accountId, setAccountId] = useState<string | undefined>(undefined);
+  const [ioId, setIoId] = useState<string | undefined>(undefined);
   const { id } = useParams<{ id?: string }>();
   const [accounts, setAccounts] = useState([]);
   const [ios, setIos] = useState([]);
@@ -61,8 +61,8 @@ const OrderCreate = (props: Props) => {
         setSpendAsOfDate('');
         setBudgetSpent(0.0);
         setContractType('');
-        setAccountId('');
-        setIoId('');
+        setAccountId(undefined);
+        setIoId(undefined);
       })
       .then(() => {
         props.fetchOrders();

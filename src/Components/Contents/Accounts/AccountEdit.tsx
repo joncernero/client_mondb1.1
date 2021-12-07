@@ -35,8 +35,10 @@ const AccountUpdate = (props: Props) => {
   const [editPrimaryXCode, setEditPrimaryXCode] = useState(
     props.accountToUpdate.primaryXCode
   );
-  const [editUserId, setEditUserId] = useState(props.accountToUpdate.userId);
-  const [editAgencyId, setEditAgencyId] = useState(
+  const [editUserId, setEditUserId] = useState<String | undefined>(
+    props.accountToUpdate.userId
+  );
+  const [editAgencyId, setEditAgencyId] = useState<String | undefined>(
     props.accountToUpdate.agencyId
   );
 

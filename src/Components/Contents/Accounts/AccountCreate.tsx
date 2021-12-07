@@ -20,8 +20,8 @@ const AccountCreate = (props: Props) => {
   const [accountType, setAccountType] = useState('');
   const [assignmentDate, setAssignmentDate] = useState('');
   const [primaryXCode, setPrimaryXCode] = useState('');
-  const [userId, setUserId] = useState('');
-  const [agencyId, setAgencyId] = useState('');
+  const [userId, setUserId] = useState<string | undefined>(undefined);
+  const [agencyId, setAgencyId] = useState<string | undefined>(undefined);
   // const [users, setUsers] = useState([]);
 
   const fetchAccountData = (e: React.SyntheticEvent): void => {
@@ -51,8 +51,8 @@ const AccountCreate = (props: Props) => {
         setAccountType('');
         setAssignmentDate('');
         setPrimaryXCode('');
-        setUserId('');
-        setAgencyId('');
+        setUserId(undefined);
+        setAgencyId(undefined);
       })
       .then(() => {
         props.fetchAccounts();

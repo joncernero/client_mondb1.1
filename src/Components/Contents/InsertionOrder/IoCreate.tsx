@@ -15,7 +15,7 @@ const IoCreate = (props: Props) => {
   const [agencyIO, setAgencyIO] = useState('');
   const [ioBudget, setIoBudget] = useState(0);
   const [ioSpend, setIoSpend] = useState(0);
-  const [agencyId, setAgencyId] = useState('');
+  const [agencyId, setAgencyId] = useState<String | undefined>(undefined);
 
   const fetchIoData = (e: React.SyntheticEvent) => {
     e.preventDefault();

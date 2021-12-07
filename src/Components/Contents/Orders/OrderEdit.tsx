@@ -42,10 +42,12 @@ const OrderEdit = (props: Props) => {
   const [editContractType, setEditContractType] = useState(
     props.orderToUpdate.contractType
   );
-  const [editAccountId, setEditAccountId] = useState(
+  const [editAccountId, setEditAccountId] = useState<string | undefined>(
     props.orderToUpdate.accountId
   );
-  const [editIoId, setEditIoId] = useState(props.orderToUpdate.ioId);
+  const [editIoId, setEditIoId] = useState<string | undefined>(
+    props.orderToUpdate.ioId
+  );
 
   const OrderUpdate = (e: React.SyntheticEvent): void => {
     e.preventDefault();
