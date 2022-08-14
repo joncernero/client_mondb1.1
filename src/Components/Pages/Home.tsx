@@ -1,15 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import Logo from '../../Assets/PikPng.com_monster-logo-png_1063210.png';
 
 const Home = () => {
   return (
     <Container>
       <div>
         <h1>AccountHub</h1>
-        <h3>PPC Campaign Manager Resource</h3>
+        <h3>Campaign Manager Resource</h3>
       </div>
-      <LogoImage />
     </Container>
   );
 };
@@ -21,7 +19,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 90vh;
+  height: 80vh;
 
   div {
     display: flex;
@@ -40,10 +38,10 @@ export const Container = styled.div`
   }
 `;
 
-export const LogoImage = styled.img.attrs({
-  src: `${Logo}`,
-})`
-  width: 10%;
-  height: auto;
-  margin: 200px 0 0 0;
-`;
+// export const Image = styled.img.attrs({
+//   src: `${#}`,
+// })`
+//   width: 10%;
+//   height: auto;
+//   margin: 200px 0 0 0;
+// `;

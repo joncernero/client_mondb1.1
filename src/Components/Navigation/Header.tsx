@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import NavBar from './Navbar';
 import * as FaIcons from 'react-icons/fa';
-import Monster from '../../Assets/header-m.png';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 
@@ -33,7 +32,6 @@ const Header = (props: Props) => {
           ) : null}
         </div>
         <AppTitle>
-          <MonsterImage />
           <Link to='/dashboard'>
             <h1>AccountHub</h1>
           </Link>
@@ -60,6 +58,7 @@ export default Header;
 
 export const Container = styled.div`
   display: flex;
+  padding-top: 15px;
   justify-content: space-between;
   height: 10vh;
   width: 100%;
@@ -68,20 +67,18 @@ export const Container = styled.div`
 
 export const NavIcon = styled.div`
   display: flex;
-  margin: 15px 15px;
+  flex-direction: row;
+  align-items: start;
+  padding-left: 15px;
   font-size: 25px;
   color: #59328c;
-
   div:hover:nth-child(1) {
     color: #c2abe1;
   }
 `;
 
 export const AppTitle = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  padding-left: 15px;
   h1 {
     font-size: 20px;
   }
@@ -103,7 +100,7 @@ export const LogButton = styled.button`
   background: transparent;
   border: 2px solid #59328c;
   border-radius: 5px;
-  margin: 15px 15px 0 0;
+  margin-right: 15px;
   font-weight: bold;
 
   a {
@@ -118,11 +115,11 @@ export const LogButton = styled.button`
   }
 `;
 
-export const MonsterImage = styled.img.attrs({
-  src: `${Monster}`,
-})`
-  width: 100px;
-  height: 25px;
-  padding: 5px;
-  margin: 0 0 0 10px;
-`;
+// export const Image = styled.img.attrs({
+//   src: `${#}`,
+// })`
+//   width: 100px;
+//   height: 25px;
+//   padding: 5px;
+//   margin: 0 0 0 10px;
+// `;
