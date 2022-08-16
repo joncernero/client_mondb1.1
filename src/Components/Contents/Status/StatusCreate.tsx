@@ -69,12 +69,7 @@ const StatusCreate = (props: Props) => {
 
   const AtRiskArray = ['Yes', 'No'];
 
-  const IntroStatusArray = [
-    'New to Monster',
-    'Conversion from Duration',
-    'Renewed from Duration',
-    'Returning PPC',
-  ];
+  const IntroStatusArray = ['New', 'Conversion', 'Renewed', 'Returning'];
 
   const HealthArray = ['Green', 'Yellow', 'Red'];
 

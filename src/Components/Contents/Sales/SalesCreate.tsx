@@ -58,10 +58,10 @@ const SalesCreate = (props: Props) => {
   };
 
   const PPCSalesArray = [
-    'Adam Palazzo',
-    'Brandon Poynter',
-    'Jeff Barchetto',
-    'Jason Flash',
+    'PPCSalesFour',
+    'PPCSalesThree',
+    'PPCSalesTwo',
+    'PPCSalesOne',
   ];
 
   const SalesSegmentArray = [
@@ -237,17 +237,12 @@ const SalesCreate = (props: Props) => {
   ];
 
   const PrimarySalesArray = [
-    'Amy Amaro-Martin',
-    "Tiffany O'Connor",
-    'Scott Lacy',
-    'Allison Goldman',
-    'Bob Braman',
-    'Jim Vandy',
-    'Andy Rutlidge',
-    'Ann Jackman',
-    'Dustin Thayer',
-    'Michelle Williams',
-    'Robert Klapman',
+    'PrimarySalesOne',
+    'PrimarySalesTwo',
+    'PrimarySalesThree',
+    'PrimarySalesFour',
+    'PrimarySalesFive',
+    'PrimarySalesSix',
   ];
 
   return (
