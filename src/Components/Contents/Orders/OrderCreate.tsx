@@ -132,6 +132,7 @@ const OrderCreate = (props: Props) => {
             name='orderNumber'
             value={orderNumber}
             onChange={(e) => setOrderNumber(e.target.value)}
+            required
           />
         </div>
         <div>
@@ -152,6 +153,7 @@ const OrderCreate = (props: Props) => {
             type='date'
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
+            required
           />
         </div>
         <div>
@@ -161,6 +163,7 @@ const OrderCreate = (props: Props) => {
             type='date'
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
+            required
           />
         </div>
         <div>
@@ -170,6 +173,7 @@ const OrderCreate = (props: Props) => {
             type='date'
             value={campaignStartDate}
             onChange={(e) => setCampaignStartDate(e.target.value)}
+            required
           />
         </div>
         <div>
@@ -179,6 +183,7 @@ const OrderCreate = (props: Props) => {
             type='date'
             value={spendAsOfDate}
             onChange={(e) => setSpendAsOfDate(e.target.value)}
+            required
           />
         </div>
         <div>
@@ -188,6 +193,7 @@ const OrderCreate = (props: Props) => {
             type='number'
             value={orderAmount}
             onChange={(e) => setOrderAmount(Number(e.target.value))}
+            required
           />
         </div>
         <div>

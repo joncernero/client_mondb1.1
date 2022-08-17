@@ -154,6 +154,7 @@ const OrderEdit = (props: Props) => {
             type='date'
             value={editSpendAsOfDate}
             onChange={(e) => setEditSpendAsOfDate(e.target.value)}
+            required
           />
         </div>
         <div>
