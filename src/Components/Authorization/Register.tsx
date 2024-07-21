@@ -20,7 +20,7 @@ const Register = (props: Props) => {
 
   const handleUserSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    fetch(`${APIURL}/user/create`, {
+    fetch(`${APIURL}/create`, {
       method: 'POST',
       body: JSON.stringify({
         email: email,
