@@ -53,6 +53,7 @@ const AccountTable = (props: Props) => {
         </tr>
       ));
   };
+
   return (
     <>
       <AccountContainer>

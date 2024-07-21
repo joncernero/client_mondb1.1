@@ -4,8 +4,9 @@ switch (window.location.hostname) {
   case 'localhost' || '127.0.0.1':
     APIURL = 'http://localhost:3000';
     break;
-  case 'jac-accounthubclient.herokuapp.com':
-    APIURL = 'https://jac-accounthubserver.herokuapp.com';
+  case 'https://accounthub.vercel.app/':
+    APIURL = 'https://accounthub.vercel.app/';
+    break;
 }
 
 export default APIURL;

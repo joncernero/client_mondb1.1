@@ -1,5 +1,5 @@
-import React from 'react';
 import * as AiIcons from 'react-icons/ai';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import styled from 'styled-components';
