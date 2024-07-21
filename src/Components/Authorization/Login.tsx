@@ -17,7 +17,7 @@ const Login = (props: Props) => {
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     fetch(`${APIURL}/user/login`, {
-      method: 'GET',
+      method: 'POST',
       body: JSON.stringify({
         email,
         password,
