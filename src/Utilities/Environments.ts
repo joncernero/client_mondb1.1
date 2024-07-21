@@ -1,11 +1,11 @@
 let APIURL = '';
 
 switch (window.location.hostname) {
-  case 'localhost' || '127.0.0.1':
-    APIURL = 'http://localhost:3000';
-    break;
   case 'https://accounthub.vercel.app':
     APIURL = 'https://server-mondb.onrender.com';
+    break;
+  case 'localhost' || '127.0.0.1':
+    APIURL = 'http://localhost:3000';
     break;
 }
 
