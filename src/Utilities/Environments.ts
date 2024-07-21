@@ -5,7 +5,7 @@ switch (window.location.hostname) {
     APIURL = 'http://localhost:3000';
     break;
   case 'https://accounthub.vercel.app/':
-    APIURL = 'https://accounthub.vercel.app/';
+    APIURL = 'https://server-mondb.onrender.com';
     break;
 }
 
