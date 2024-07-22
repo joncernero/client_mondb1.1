@@ -7,6 +7,9 @@ switch (window.location.hostname) {
   case 'localhost' || '127.0.0.1':
     APIURL = 'http://localhost:3000';
     break;
+  default:
+    APIURL = 'https://server-mondb.onrender.com';
 }
 
+APIURL = 'https://server-mondb.onrender.com';
 export default APIURL;
