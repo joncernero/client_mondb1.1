@@ -33,7 +33,6 @@ export const Container = styled.div`
   column-gap: 5px;
   margin: 0 auto;
   min-width: 100vw;
-  min-height: 100vh;
 `;
 
 export const ChildOne = styled.div`
@@ -46,6 +45,6 @@ export const ChildTwo = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
+
   margin: 10px 50px 0 5px;
 `;
