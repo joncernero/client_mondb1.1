@@ -100,6 +100,6 @@ export const ContentContainer = styled.div`
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   padding: 25px;
-  height: 250px;
+  height: 330px;
   overflow: scroll;
 `;
