@@ -31,7 +31,9 @@ export default AccountDisplay;
 export const Container = styled.div`
   display: flex;
   column-gap: 5px;
-  margin: 0 100px;
+  margin: 0 auto;
+  min-width: 100vw;
+  min-height: auto;
 `;
 
 export const ChildOne = styled.div`
