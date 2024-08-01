@@ -116,7 +116,7 @@ export const ContentContainer = styled.div`
   border-top-right-radius: 0px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  padding: 25px;
+  padding: 15px;
   overflow: scroll;
   height: 430px;
 `;
