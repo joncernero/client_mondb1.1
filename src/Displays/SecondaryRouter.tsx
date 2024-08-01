@@ -148,4 +148,5 @@ export const ContentContainer = styled.div`
   border-bottom-right-radius: 10px;
   padding: 25px;
   overflow: scroll;
+  height: 871px;
 `;
