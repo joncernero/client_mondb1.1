@@ -170,6 +170,7 @@ export default OrderTable;
 export const OrderContainer = styled.div`
   display: flex;
   flex-direction: column;
+  height: 100%;
 `;
 
 export const Title = styled.div`
@@ -185,8 +186,8 @@ export const TableContainer = styled.div`
 
 export const Table = styled.table`
   table-layout: fixed;
-  width: 200%;
-  /* height: 200px; */
+  width: 100%;
+  height: 100%;
   padding: 5px 5px 10px 5px;
   border-collapse: separate;
   border-spacing: 0;
