@@ -11,6 +11,12 @@ import WeeklyIndex from '../Components/Contents/WeeklyUpdates/WeeklyIndex';
 import styled from 'styled-components';
 import ActivityIndex from '../Components/Contents/Activities/ActivityIndex';
 import EngagementIndex from '../Components/Contents/Engagements/EngageIndex';
+import OrdersIndex from '../Components/Contents/Orders/OrdersIndex';
+import BudgetsIndex from '../Components/Contents/Budgets/BudgetsIndex';
+import ProviderIndex from '../Components/Contents/ProviderInfo/ProviderIndex';
+import ImplementIndex from '../Components/Contents/Implementation/ImplementIndex';
+import CampaignIndex from '../Components/Contents/Campaigns/CampaignIndex';
+import SalesIndex from '../Components/Contents/Sales/SalesIndex';
 
 type Props = {
   token: string | null;
@@ -32,6 +38,24 @@ export default function SecondaryRouter(props: Props) {
           <li>
             <Link to={`${url}/weeklyupdate/${id}`}>Weekly Updates</Link>
           </li>
+          <li>
+            <Link to={`${url}/order/${id}`}>Orders</Link>
+          </li>
+          <li>
+            <Link to={`${url}/budget/${id}`}>Budgets</Link>
+          </li>
+          <li>
+            <Link to={`${url}/provider/${id}`}>Provider</Link>
+          </li>
+          <li>
+            <Link to={`${url}/implementation/${id}`}>Implementation</Link>
+          </li>
+          <li>
+            <Link to={`${url}/Campaign/${id}`}>Campaign</Link>
+          </li>
+          <li>
+            <Link to={`${url}/sales/${id}`}>Sales Info</Link>
+          </li>
         </ul>
 
         <ContentContainer>
@@ -44,6 +68,24 @@ export default function SecondaryRouter(props: Props) {
             </Route>
             <Route exact path={`${path}/weeklyupdate/:id`}>
               <WeeklyIndex token={props.token} />
+            </Route>
+            <Route exact path={`${path}/order/:id`}>
+              <OrdersIndex token={props.token} />
+            </Route>
+            <Route exact path={`${path}/budget/:id`}>
+              <BudgetsIndex token={props.token} />
+            </Route>
+            <Route exact path={`${path}/provider/:id`}>
+              <ProviderIndex token={props.token} />
+            </Route>
+            <Route exact path={`${path}/implementation/:id`}>
+              <ImplementIndex token={props.token} />
+            </Route>
+            <Route exact path={`${path}/campaign/:id`}>
+              <CampaignIndex token={props.token} />
+            </Route>
+            <Route exact path={`${path}/sales/:id`}>
+              <SalesIndex token={props.token} />
             </Route>
           </Switch>
         </ContentContainer>
