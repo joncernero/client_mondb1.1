@@ -61,6 +61,7 @@ export default function SecondaryRouter(props: Props) {
 
 export const Container = styled.div`
   width: 100%;
+  margin-top: 15px;
 
   ul {
     display: flex;
@@ -109,6 +110,6 @@ export const ContentContainer = styled.div`
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   padding: 25px;
-  height: 250px;
+  height: 330px;
   overflow: scroll;
 `;

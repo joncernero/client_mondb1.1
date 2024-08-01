@@ -50,7 +50,7 @@ export default function SecondaryRouter(props: Props) {
 export const Container = styled.div`
   width: 100%;
   height: 100%;
-  margin-bottom: 15px;
+  margin-top: 15px;
   /* overflow: hidden; */
 
   ul {
@@ -103,5 +103,4 @@ export const ContentContainer = styled.div`
   padding: 25px;
   height: 330px;
   overflow: scroll;
-  margin-top: 15px;
 `;
