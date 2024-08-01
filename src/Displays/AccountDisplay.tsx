@@ -32,6 +32,7 @@ export const Container = styled.div`
   column-gap: 5px;
   margin: 0 auto;
   min-width: 100vw;
+  min-height: 100vh;
 `;
 
 export const ChildOne = styled.div`
